@@ -1,0 +1,36 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET         /                                controllers.ApplicationController.index
+GET         /signIn                          controllers.ApplicationController.signIn
+GET         /signUp                          controllers.ApplicationController.signUp
+GET         /signOut                         controllers.ApplicationController.signOut
+GET         /authenticate/:provider          controllers.SocialAuthController.authenticate(provider)
+POST        /authenticate/credentials        controllers.CredentialsAuthController.authenticate
+POST        /signUp                          controllers.SignUpController.signUp
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file                    controllers.Assets.at(path="/public", file)
+GET         /webjars/*file                   controllers.WebJarAssets.at(file)
+
+#Cs
+GET         /run                                controllers.ApplicationController.run
+GET         /adduser                            controllers.ApplicationController.signUpcs
+GET         /gotoadduser                        controllers.ApplicationController.adduser
+GET         /pagelist                           controllers.ApplicationController.getlist
+GET         /up                                 controllers.ApplicationController.uploadfile
+GET         /relation                           controllers.ApplicationController.relation
+GET         /addrelation/:teaID                 controllers.ApplicationController.addrelation(teaID :String)
+GET         /dataUser/:id                       controllers.ApplicationController.dataUser(id : String)
+GET         /clear                              controllers.ApplicationController.clear
+GET         /gup                                controllers.ApplicationController.gitupload
+
+#POST       /signUpcs                           controllers.SignUpController.signUpcs
+POST        /addrole                            controllers.SignUpController.addrole
+POST        /adduserlogin                       controllers.SignUpController.adduser
+
+GET         /delete/:id                         controllers.CscloudstorageController.deleteUser(id : String)
+POST        /upload                             controllers.CscloudstorageController.upload()
+GET         /gsta                               controllers.CscloudstorageController.gitstatus

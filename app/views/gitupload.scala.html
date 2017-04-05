@@ -1,0 +1,7 @@
+@(user: models.User,role:Option[models.DBUserRole])(implicit request: RequestHeader, messages: Messages)
+
+@maincs(Some(user),role) {
+  <a href="/gsta">
+    <button type="button" name="button">Click</button>
+  </a>
+}

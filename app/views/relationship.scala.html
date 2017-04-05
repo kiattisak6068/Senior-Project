@@ -1,0 +1,115 @@
+
+@(str : String,user:models.User,users : Seq[models.Modellist],roleuser:Option[models.DBUserRole],teacher : Seq[models.Modellist],relation : Seq[models.DBAdviser])(implicit request: RequestHeader, messages: Messages)
+
+
+@maincs(Some(user),roleuser){
+  <br>
+  <br>
+  <br>
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+  <div class="panel panel-default">
+  <div class="panel-body">
+  <div class="col-md-12">
+    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%" >
+      <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Teacher</th>
+          <th style="text-align: center;">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(u
+          <- users){ <tr>
+            <td>@u.fullName</td>
+            @if(relation != Nil){
+              @for(r <- relation ){
+                @if(u.userID == r.stuID){
+                  @for(t <- teacher){
+                    @if(r.teaID == t.userID){
+                      <td>@t.fullName</td>
+                      <td style="text-align: center;" class="col-md-2 col-sm-3">
+                      <a href="@routes.ApplicationController.dataUser(u.userID)" data-toggle="modal" id="link">
+                        <button name="@u.userID" class="btn btn-sm  btn-default">Edit</button>
+                      </a>
+                      </td>
+                    }
+                  }
+                }else{
+                  <td></td>
+                  <td style="text-align: center;" class="col-md-2 col-sm-3">
+                  <a href="@routes.ApplicationController.dataUser(u.userID)" data-toggle="modal" id="link">
+                    <button name="@u.userID" class="btn btn-sm  btn-default">Add</button>
+                  </a>
+                  </td>
+                }
+
+              }
+            }else{
+              <td></td>
+              <td style="text-align: center;" class="col-md-2 col-sm-3">
+              <a href="@routes.ApplicationController.dataUser(u.userID)" data-toggle="modal" id="link">
+                <button name="@u.userID" class="btn btn-sm  btn-default">Add</button>
+              </a>
+              </td>
+            }
+      </tr>
+
+      }
+      </tbody>
+    </table>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+  <!--dialog login-->
+  <div class="modal fade" id="myModallogin" role="dialog">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                <a href="/clear">
+                  <button type="button" class="close" ><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                </a>
+                  <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Select Teacher</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="row">
+                      <div class="col-xs-12 ">
+                          <div class="well">
+                            <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%" >
+                              <thead>
+                                <tr>
+                                  <th>Full Name</th>
+                                  <th style="text-align: center;">Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                @for(tea
+                                  <- teacher){ <tr>
+                                    <td>@tea.fullName</td>
+                                    <td style="text-align: center;" class="col-md-2 col-sm-3">
+                                      <a  href="@routes.ApplicationController.addrelation(tea.userID)">
+                                      <button class="btn btn-sm  btn-default" >Select</button>
+                                      </a>
+                                    </td>
+                              </tr>
+                              }
+                              </tbody>
+                            </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!--dialog login-->
+
+}
+@if(str == "show"){
+  <script>
+    document.getElementById("link").onclick = $('#myModallogin').modal('show');
+  </script>
+}

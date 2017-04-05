@@ -1,0 +1,19 @@
+@(signInForm: Form[forms.Roleform.Data])(implicit request: RequestHeader, messages: Messages)
+
+@import b3.inline.fieldConstructor
+@role = @{ Seq("Student"->"Student","Teacher"->"Teacher","Admin"->"Admin") }
+
+@maincs() {
+    <fieldset class="col-md-6 col-md-offset-3">
+        <legend>@Messages("sign.up.account")</legend>
+        @helper.form(action = routes.SignUpController.addrole()) {
+            @helper.CSRF.formField
+            @b3.select( signInForm("role"), options = role,'class -> "form-control input-lg" )
+            <div class="form-group">
+                <div>
+                    <button id="submit" type="submit" value="submit" class="btn btn-lg btn-primary btn-block">@Messages("sign.up")</button>
+                </div>
+            </div>
+        }
+    </fieldset>
+}

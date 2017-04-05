@@ -1,0 +1,225 @@
+2017-03-26 23:31:33 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Table "PLAY_EVOLUTIONS" not found; SQL statement:
+select id, hash, apply_script, revert_script, state, last_problem from play_evolutions where state like 'applying_%' [42102-188]
+2017-03-27 18:22:14 jdbc[767]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:72)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:92)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:98)
+	at com.zaxxer.hikari.pool.BaseHikariPool.addConnection(BaseHikariPool.java:438)
+	at com.zaxxer.hikari.pool.BaseHikariPool$1.run(BaseHikariPool.java:413)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 16 more
+2017-03-27 19:20:00 jdbc[361]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:72)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:92)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:98)
+	at com.zaxxer.hikari.pool.BaseHikariPool.addConnection(BaseHikariPool.java:438)
+	at com.zaxxer.hikari.pool.BaseHikariPool$1.run(BaseHikariPool.java:413)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 16 more
+2017-03-27 20:33:50 jdbc[884]: java.lang.Exception: Open Stack Trace
+	at org.h2.util.CloseWatcher.register(CloseWatcher.java:100)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:119)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:72)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:735)
+	at org.h2.server.web.WebApp.login(WebApp.java:955)
+	at org.h2.server.web.WebApp.process(WebApp.java:211)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:170)
+	at org.h2.server.web.WebThread.process(WebThread.java:133)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:72)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:92)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:98)
+	at com.zaxxer.hikari.pool.BaseHikariPool.addConnection(BaseHikariPool.java:438)
+	at com.zaxxer.hikari.pool.BaseHikariPool$1.run(BaseHikariPool.java:413)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 16 more
+2017-03-27 20:38:42 jdbc[947]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:72)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:92)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:98)
+	at com.zaxxer.hikari.pool.BaseHikariPool.addConnection(BaseHikariPool.java:438)
+	at com.zaxxer.hikari.pool.BaseHikariPool$1.run(BaseHikariPool.java:413)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 16 more
+2017-03-27 20:38:42 jdbc[947]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:72)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:92)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:98)
+	at com.zaxxer.hikari.pool.BaseHikariPool.addConnection(BaseHikariPool.java:438)
+	at com.zaxxer.hikari.pool.BaseHikariPool$1.run(BaseHikariPool.java:413)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 16 more
+2017-03-28 21:09:38 jdbc[1189]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:72)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:92)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:98)
+	at com.zaxxer.hikari.pool.BaseHikariPool.addConnection(BaseHikariPool.java:438)
+	at com.zaxxer.hikari.pool.BaseHikariPool$1.run(BaseHikariPool.java:413)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 16 more
+2017-03-28 21:09:38 jdbc[1189]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:72)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:92)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:98)
+	at com.zaxxer.hikari.pool.BaseHikariPool.addConnection(BaseHikariPool.java:438)
+	at com.zaxxer.hikari.pool.BaseHikariPool$1.run(BaseHikariPool.java:413)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 16 more
+2017-03-28 22:09:34 jdbc[1585]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:72)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:92)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:98)
+	at com.zaxxer.hikari.pool.BaseHikariPool.addConnection(BaseHikariPool.java:438)
+	at com.zaxxer.hikari.pool.BaseHikariPool$1.run(BaseHikariPool.java:413)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 16 more
+2017-03-29 00:40:52 jdbc[677]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:72)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:92)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:98)
+	at com.zaxxer.hikari.pool.BaseHikariPool.addConnection(BaseHikariPool.java:438)
+	at com.zaxxer.hikari.pool.BaseHikariPool$1.run(BaseHikariPool.java:413)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 16 more
+2017-03-29 00:40:52 jdbc[677]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:72)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:92)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:98)
+	at com.zaxxer.hikari.pool.BaseHikariPool.addConnection(BaseHikariPool.java:438)
+	at com.zaxxer.hikari.pool.BaseHikariPool$1.run(BaseHikariPool.java:413)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 16 more

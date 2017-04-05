@@ -1,0 +1,107 @@
+@(user: Option[models.User] = None,roleUser:Option[models.DBUserRole]= None)(content: Html)(implicit request: RequestHeader, messages: Messages)
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <title>Cs Cloud Storage</title>
+        <link href="//fonts.googleapis.com/css?family=Roboto|Montserrat:400,700|Open+Sans:400,300,600" rel="stylesheet">
+        <link href="//cdnjs.cloudflare.com/ajax/libs/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.css"))">
+        <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap-theme.min.css"))">
+        <link rel="stylesheet" href="@routes.Assets.at("styles/main.css")">
+        <link rel="stylesheet"  href="@routes.Assets.at("font-awesome-4.7.0/css/font-awesome.min.css")">
+        <style media="screen">
+        .navbar-brand {
+          float: left;
+          height: 60px;
+          padding: 18px 15px;
+          font-size: 20px;
+          line-height: 20px;
+        }
+        .navbar-color{
+          background-color: #909090;
+          border-color: #080808;
+        }
+        .navbar{
+          min-height: 50px;
+        }
+        .body{
+          background-color: #c3c3c3;
+        }
+
+        </style>
+    </head>
+    <body class="body">
+        <header class="navbar navbar-color navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">@Messages("toggle.navigation")</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#" style="color:#222"><i class="fa fa-folder" aria-hidden="true"></i> CS Cloud Storage</a>
+                </div>
+                <nav class="collapse navbar-collapse">
+                    <div class="nav navbar-nav">
+                      <form class="navbar-form navbar-left">
+                        <div class="dropdown">
+                          <select class="form-control" >
+                            <option value="volvo">--Teacher--</option>
+                            <option value="saab">Saab</option>
+                            <option value="opel">Opel</option>
+                            <option value="audi">Audi</option>
+                          </select>
+                        <input type="text" placeholder="Search" class="form-control">
+                        <button type="submit" class="btn btn-primary" style="margin-top:-0.4%"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </div>
+                      </form>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a class="navbar-brand" href="/" style="color:#222"><i class="fa fa-home" aria-hidden="true"></i> Home </a></li>
+                      @user.map { u =>
+
+                        <li>
+                          <a href="#" class="navbar-brand" style="color:#222" role="button" data-toggle="dropdown"><i class="fa fa-bars" aria-hidden="true"> Menu</i> <span class="caret"></a>
+                            <ul class="dropdown-menu">
+                              @roleUser.map { r =>
+                                @if(r.role == "Admin"){
+                                  <li><a href="/gotoadduser" > <i class="fa fa-user" aria-hidden="true"></i> Add Users </a></li>
+                                  <li><a href="/pagelist" > <i class="fa fa-user" aria-hidden="true"></i> Edit Users </a></li>
+                                  <li><a href="/relation" > <i class="fa fa-user" aria-hidden="true"></i> Relation </a></li>
+                                  <li><a href="/gup" > <i class="fa fa-user" aria-hidden="true"></i> Up </a></li>
+                                }
+                              }
+
+                            </ul>
+                        </li>
+
+                          <li class="dropdown">
+                            <a href="#" class="navbar-brand" role="button" data-toggle="dropdown"style="color:#222"><i class="fa fa-user" aria-hidden="true"></i> @u.firstName <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="@routes.ApplicationController.signOut"> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout </a></li>
+                            </ul>
+                          </li>
+                       }.getOrElse {
+                            <li><a class="navbar-brand" href="/signIn" style="color:#222"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign in </a></li>
+                        }
+
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main class="container">
+            <div class="starter-template row">
+                @content
+            </div>
+        </main>
+
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))"></script>
+        <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.js"))"></script>
+    </body>
+</html>
