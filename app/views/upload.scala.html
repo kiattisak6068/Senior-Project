@@ -1,12 +1,41 @@
 @(form: Form[forms.Upform.Data])(implicit request: RequestHeader, messages: Messages)
 @import b3.inline.fieldConstructor
 @maincs() {
-  @helper.form(action = routes.CscloudstorageController.upload, 'enctype -> "multipart/form-data") {
-    @helper.CSRF.formField
-    @b3.file( form("img"), '_label -> "File" )
-    <p>
-        <input type="submit">
-    </p>
 
-}
+    <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="panel panel-info">
+          <div class="panel-body">
+                <div class="col-sm-12">
+                  <h2 class="text-center"><b>UPLOAD FILE</b> </h2><br>
+                  <div class="col-lg-1  col-lg-offset-4">
+                    <a ><img src="assets/images/doc.png" class="img-responsive"></a>
+                  </div>
+                  <div class="col-lg-1">
+                    <a ><img src="assets/images/code.png" class="img-responsive"></a>
+                  </div>
+                  <div class="col-lg-1">
+                    <a ><img src="assets/images/pdf.png" class="img-responsive"></a>
+                  </div>
+                  <div class="col-lg-1">
+                    <a ><img src="assets/images/zip.png" class="img-responsive"></a>
+                  </div>
+               <br>
+               <br>
+               @helper.form(action = routes.CscloudstorageController.upload, 'enctype -> "multipart/form-data") {
+                 @helper.CSRF.formField
+                 @b3.text( form("title"), '_label -> "Topic")
+                 @b3.textarea( form("detail"), '_label -> "Description", 'rows -> 3 )
+                 @b3.file(form("img"), '_label -> "Picture" )
+                 <p>
+                     <input type="submit">
+                 </p>
+               }
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
 }

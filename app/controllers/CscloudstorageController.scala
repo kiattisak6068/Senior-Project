@@ -64,10 +64,9 @@ import java.io.File
 
     def upload = Action(parse.multipartFormData) { request =>
         request.body.file("img").map { picture =>
-
           val filename = picture.filename
           val contentType = picture.contentType
-          picture.ref.moveTo(new File(s"C:/Users/PonD/Desktop/$filename"))
+          picture.ref.moveTo(new File(s"public/images/$filename"))
           Ok("File uploaded")
         }.getOrElse {
           Ok("File F")

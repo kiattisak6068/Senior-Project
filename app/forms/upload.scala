@@ -10,10 +10,14 @@ object Upform {
 
   val form = Form(
     mapping(
+      "title" -> nonEmptyText,
+      "detail" -> nonEmptyText,
       "img" -> nonEmptyText
     )(Data.apply)(Data.unapply)
   )
 
   case class Data(
+    title:String,
+    detail:String,
     img: String)
 }
