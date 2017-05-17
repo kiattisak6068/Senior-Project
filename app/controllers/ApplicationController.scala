@@ -132,7 +132,18 @@ class ApplicationController @Inject() (
   }
 
   def uploadfile = UserAwareAction.async { implicit request =>
-    Future.successful(Ok(views.html.upload(Upform.form)))
+    request.identity match {
+      case Some(user) =>
+      val c = for{
+        a <- Userroles.get(user.userID.toString)
+      }yield a
+
+      c.map { case (role) =>
+          Ok(views.html.upload(user,role))
+      }
+
+      case None => Future.successful(Redirect("/"))
+    }
   }
 
   var str = "";

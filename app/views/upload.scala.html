@@ -1,6 +1,7 @@
-@(form: Form[forms.Upform.Data])(implicit request: RequestHeader, messages: Messages)
+@(user:models.User,roleuser:Option[models.DBUserRole])(implicit request: RequestHeader, messages: Messages)
+
 @import b3.inline.fieldConstructor
-@maincs() {
+@maincs(Some(user),roleuser) {
 
     <div class="col-md-2"></div>
       <div class="col-md-8">
@@ -22,16 +23,31 @@
                   </div>
                <br>
                <br>
-               @helper.form(action = routes.CscloudstorageController.upload, 'enctype -> "multipart/form-data") {
-                 @helper.CSRF.formField
-                 @b3.text( form("title"), '_label -> "Topic")
-                 @b3.textarea( form("detail"), '_label -> "Description", 'rows -> 3 )
-                 @b3.file(form("img"), '_label -> "Picture" )
-                 <p>
-                     <input type="submit">
-                 </p>
-               }
 
+               @helper.form(routes.CscloudstorageController.upload, 'enctype -> "multipart/form-data") {
+                 @helper.CSRF.formField
+
+                 <div class="form-group">
+                      <h5 >Topic</h5>
+                      <input type="text" class="form-control" name="title">
+
+                    </div>
+                       <div class="form-group">
+                         <h5 for="detail">Description</h5>
+                         <textarea class="form-control" name="detail" rows="3"></textarea>
+                       </div>
+                    <div class="form-group">
+                        <h5 for="img">Picture</h5>
+                        <input type="file" class="form-control-file" name="img" aria-describedby="fileHelp" style="color: #2ECC71">
+                    </div>
+
+
+                    <div class=" text-right">
+                      <button type="submit" class="btn btn-success">Commit Changes</button> &nbsp; &nbsp;
+                      <button type="submit" class="btn btn-danger">Cancel</button>
+                    </div>
+
+               }
 
             </div>
           </div>

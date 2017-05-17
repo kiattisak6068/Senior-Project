@@ -1,8 +1,7 @@
 package controllers
 
+import java.util.UUID
 import javax.inject.Inject
-import sys.process._
-import com.mohiva.play.silhouette.api.{ Environment, LogoutEvent, Silhouette }
 import com.mohiva.play.silhouette.api._
 import com.mohiva.play.silhouette.api.repositories.AuthInfoRepository
 import com.mohiva.play.silhouette.api.services.AvatarService
@@ -10,19 +9,16 @@ import com.mohiva.play.silhouette.api.util.PasswordHasher
 import com.mohiva.play.silhouette.impl.authenticators.CookieAuthenticator
 import com.mohiva.play.silhouette.impl.providers._
 import forms._
-import models.User
-import models.Userroles
+import models._
 import models.services.UserService
+import play.api.i18n.{ MessagesApi, Messages }
+import play.api.libs.concurrent.Execution.Implicits._
+import play.api.mvc.Action
 import play.api.mvc._
-import play.api.i18n.MessagesApi
 import scala.concurrent.Future
-import scala.concurrent.ExecutionContext.Implicits.global
-import models.MUser
-import models.ListUser
-import models.Adviser
-import models.Advisers
-
+import sys.process._
 import java.io.File
+import play.api.libs.json._
 
 /**
  * The basic application controller.
@@ -62,16 +58,41 @@ import java.io.File
 
       }
 
-    def upload = Action(parse.multipartFormData) { request =>
-        request.body.file("img").map { picture =>
-          val filename = picture.filename
-          val contentType = picture.contentType
-          picture.ref.moveTo(new File(s"public/images/$filename"))
-          Ok("File uploaded")
-        }.getOrElse {
-          Ok("File F")
-          }
+    def upload = Action { request =>
+    request.body.asMultipartFormData.map {a =>
+      val datatitle = a.dataParts.get("title").map { a =>
+         for{
+           b <- a.mkString("")
+          }yield b
+      }
+
+      val datadetail = a.dataParts.get("detail").map { a =>
+         for{
+           b <- a.mkString("")
+          }yield b
+      }
+
+      val dataimg = a.file("img").map { a=>
+        val filename = a.filename
+        a.ref.moveTo(new File(s"public/images/imgCsCloud/$filename"))
+        for{
+          b <- a.filename
+        }yield b
+      }
+
+      val title = getdata(datatitle)
+      val detail = getdata(datadetail)
+      val img = getdata(dataimg)
+
+      Redirect("/up")
+    }.getOrElse {
+      Redirect("/up")
+    }
   }
+    def getdata(x: Option[String]) = x match {
+     case Some(s) => s
+     case None => ""
+   }
 
   def gitstatus = Action { request =>
     val r = "git status"
