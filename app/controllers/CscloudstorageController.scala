@@ -19,6 +19,7 @@ import scala.concurrent.Future
 import sys.process._
 import java.io.File
 import play.api.libs.json._
+import org.apache.commons.io.FilenameUtils;
 
 /**
  * The basic application controller.
@@ -58,7 +59,51 @@ import play.api.libs.json._
 
       }
 
-    def upload = Action { request =>
+  //   def upload = Action { request =>
+  //   request.body.asMultipartFormData.map {a =>
+  //     val datatitle = a.dataParts.get("title").map { a =>
+  //        for{
+  //          b <- a.mkString("")
+  //         }yield b
+  //     }
+  //
+  //     val datadetail = a.dataParts.get("detail").map { a =>
+  //        for{
+  //          b <- a.mkString("")
+  //         }yield b
+  //     }
+  //
+  //     val dataimg = a.file("img").map { a=>
+  //       val filename = a.filename
+  //       a.ref.moveTo(new File(s"public/images/imgCsCloud/$filename"))
+  //       for{
+  //         b <- a.filename
+  //       }yield b
+  //     }
+  //
+  //     val title = getdata(datatitle)
+  //     val detail = getdata(datadetail)
+  //     val img = getdata(dataimg)
+  //
+  //     Redirect("/up")
+  //   }.getOrElse {
+  //     Redirect("/up")
+  //   }
+  // }
+    def getdata(x: Option[String]) = x match {
+     case Some(s) => s
+     case None => ""
+   }
+
+  def gitstatus = Action { request =>
+    val r = "git status"
+    val a = r.!
+    Ok(f"I'm run :$a")
+  }
+
+  def upload = UserAwareAction.async { implicit request =>
+  request.identity match {
+    case Some(user) =>
     request.body.asMultipartFormData.map {a =>
       val datatitle = a.dataParts.get("title").map { a =>
          for{
@@ -74,9 +119,11 @@ import play.api.libs.json._
 
       val dataimg = a.file("img").map { a=>
         val filename = a.filename
-        a.ref.moveTo(new File(s"public/images/imgCsCloud/$filename"))
+        val extension = FilenameUtils.getExtension(filename)
+        val newFileName = s"${UUID.randomUUID}.$extension"
+        a.ref.moveTo(new File(s"public/images/imgCsCloud/$newFileName"))
         for{
-          b <- a.filename
+          b <- newFileName
         }yield b
       }
 
@@ -84,21 +131,24 @@ import play.api.libs.json._
       val detail = getdata(datadetail)
       val img = getdata(dataimg)
 
-      Redirect("/up")
+      val datatodb = DBDetail (
+        userID = user.userID.toString,
+        topic = title,
+        detail = detail,
+        img = img
+      )
+
+      val saveData = for{
+          a <- ObjDetails.add(datatodb)
+      }yield a
+
+      Future.successful(Ok(""+dataimg))
     }.getOrElse {
-      Redirect("/up")
+      Future.successful(Redirect("/up"))
     }
-  }
-    def getdata(x: Option[String]) = x match {
-     case Some(s) => s
-     case None => ""
-   }
 
-  def gitstatus = Action { request =>
-    val r = "git status"
-    val a = r.!
-    Ok(f"I'm run :$a")
+    case None => Future.successful(Redirect("/"))
   }
-
+}
 
 }
