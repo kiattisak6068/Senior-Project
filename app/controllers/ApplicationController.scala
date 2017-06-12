@@ -7,15 +7,7 @@ import com.mohiva.play.silhouette.api.{ Environment, LogoutEvent, Silhouette }
 import com.mohiva.play.silhouette.impl.authenticators.CookieAuthenticator
 import com.mohiva.play.silhouette.impl.providers.SocialProviderRegistry
 import forms._
-import models.User
-import models.ListUser
-import models.DBUserRole
-import models.Modellist
-import models.UserConstants
-import models.Userroles
-import models.Advisers
-import models.Adviser
-import models.DBUser
+import models._
 import models.services.UserService
 import play.api.mvc._
 import play.api.i18n.MessagesApi
@@ -51,7 +43,11 @@ class ApplicationController @Inject() (
       Userroles.get(user.userID.toString).map{ role =>
         Ok(views.html.homecs(user,role))
       }
-    case None => Future.successful(Ok(views.html.guesthome(UserConstants.guest)))
+    case None =>
+      ObjDetails.listAll.map { detail =>
+        Ok(views.html.guesthome(UserConstants.guest,detail))
+      }
+      //Future.successful(Ok(views.html.guesthome(UserConstants.guest)))
   }
 }
 
@@ -168,8 +164,8 @@ class ApplicationController @Inject() (
   }
 
   def dataUser(id : String) = Action {
-    dataID = id
-    str = "show"
+    dataID = id;
+    str = "show";
 
     var n = for{
       b <- ListUser.getUser(dataID)
@@ -204,6 +200,32 @@ class ApplicationController @Inject() (
 
   }
 
+  def updateRelation(teaID : String) = Action.async { implicit request =>
+
+      val getRelation = for{
+        a <- Advisers.getRelation(dataID)
+      }yield a
+
+      val a = getRelation.map { data =>
+        data.map { a =>
+          val datasave = DBAdviser(
+            id = a.id,
+            stuID = a.stuID,
+            teaID = teaID
+          )
+          val updatedata = for{
+            c <- Advisers.update(datasave)
+          }yield c
+
+        }
+      }
+
+      str = ""
+      dataID = ""
+      Future.successful(Redirect("/relation"))
+
+  }
+
   def show(x: Option[String]) = x match {
    case Some(s) => s
    case None => ""
@@ -215,7 +237,7 @@ class ApplicationController @Inject() (
       Userroles.get(user.userID.toString).map{ role =>
         Ok(views.html.gitupload(user,role))
       }
-    case None => Future.successful(Ok(views.html.guesthome(UserConstants.guest)))
+    case None => Future.successful(Redirect("/"))
   }
 }
 

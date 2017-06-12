@@ -44,7 +44,12 @@ object Advisers {
     dbConfig.db.run(ad += a).map(res => "successfully").recover {
       case ex: Exception => ex.getCause.getMessage
     }
+  }
 
+  def update(adviser: DBAdviser): Future[String] = {
+    dbConfig.db.run(ad.filter(_.id === adviser.id).update(adviser)).map(res => "successfully").recover {
+      case ex: Exception => ex.getCause.getMessage
+    }
   }
 
   def delete(id: Long): Future[Int] = {
@@ -57,6 +62,10 @@ object Advisers {
 
   def get(id: Long): Future[Option[DBAdviser]] = {
     dbConfig.db.run(ad.filter(_.id === id).result.headOption)
+  }
+
+  def getRelation(stu: String): Future[Option[DBAdviser]] = {
+    dbConfig.db.run(ad.filter(_.stuID === stu).result.headOption)
   }
 
   def listAll: Future[Seq[DBAdviser]] = {

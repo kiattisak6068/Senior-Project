@@ -1,4 +1,4 @@
-@(user: models.User)(implicit request: RequestHeader, messages: Messages)
+@(user: models.User,detail:Seq[models.DBDetail])(implicit request: RequestHeader, messages: Messages)
 
 @maincs() {
 
@@ -12,128 +12,16 @@
 
               <div class="row">
 
-                  <div class="col-sm-4 col-lg-4 col-md-4">
-                      <div class="thumbnail">
-                          <img src="@routes.Assets.at("images/watchdocks.png")" alt="">
-                          <div class="caption">
-
-                              <h4><a href="/showviwe">WatchDocks</a>
-                              </h4>
-                              </div>
-                          <div class="ratings">
-                              <p class="pull-right">15 reviews</p>
-                              <p>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                              </p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-sm-4 col-lg-4 col-md-4">
-                      <div class="thumbnail">
-                          <img src="@routes.Assets.at("images/watchdocks.png")" alt="">
-                          <div class="caption">
-
-                              <h4><a href="/showviwe">WatchDocks</a>
-                              </h4>
-                              </div>
-                          <div class="ratings">
-                              <p class="pull-right">15 reviews</p>
-                              <p>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                              </p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-sm-4 col-lg-4 col-md-4">
-                      <div class="thumbnail">
-                          <img src="@routes.Assets.at("images/watchdocks.png")" alt="">
-                          <div class="caption">
-
-                              <h4><a href="/showviwe">WatchDocks</a>
-                              </h4>
-                              </div>
-                          <div class="ratings">
-                              <p class="pull-right">15 reviews</p>
-                              <p>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                              </p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-sm-4 col-lg-4 col-md-4">
-                      <div class="thumbnail">
-                          <img src="@routes.Assets.at("images/watchdocks.png")" alt="">
-                          <div class="caption">
-
-                              <h4><a href="/showviwe">WatchDocks</a>
-                              </h4>
-                              </div>
-                          <div class="ratings">
-                              <p class="pull-right">15 reviews</p>
-                              <p>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                              </p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-sm-4 col-lg-4 col-md-4">
-                      <div class="thumbnail">
-                          <img src="@routes.Assets.at("images/watchdocks.png")" alt="">
-                          <div class="caption">
-
-                              <h4><a href="/showviwe">WatchDocks</a>
-                              </h4>
-                              </div>
-                          <div class="ratings">
-                              <p class="pull-right">15 reviews</p>
-                              <p>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                              </p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-sm-4 col-lg-4 col-md-4">
-                      <div class="thumbnail">
-                          <img src="@routes.Assets.at("images/watchdocks.png")" alt="">
-                          <div class="caption">
-
-                              <h4><a href="/showviwe">WatchDocks</a>
-                              </h4>
-                              </div>
-                          <div class="ratings">
-                              <p class="pull-right">15 reviews</p>
-                              <p>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                                  <span class="glyphicon glyphicon-star"></span>
-                              </p>
-                          </div>
-                      </div>
-                  </div>
-
-
+                  @for(a <- detail){
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <img src="@routes.Assets.at("images/imgCsCloud/")@a.img" alt="@a.topic">
+                            <div class="caption">
+                              <h4><a href="@routes.CscloudstorageController.showDetial(a.userID)">@a.topic</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                  }
               </div>
 
           </div>

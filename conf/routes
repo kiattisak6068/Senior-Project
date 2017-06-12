@@ -26,6 +26,7 @@ GET         /addrelation/:teaID                 controllers.ApplicationControlle
 GET         /dataUser/:id                       controllers.ApplicationController.dataUser(id : String)
 GET         /clear                              controllers.ApplicationController.clear
 GET         /gup                                controllers.ApplicationController.gitupload
+GET         /updateRelation/:teaID              controllers.ApplicationController.updateRelation(teaID :String)
 
 #POST       /signUpcs                           controllers.SignUpController.signUpcs
 POST        /addrole                            controllers.SignUpController.addrole
@@ -34,3 +35,4 @@ POST        /adduserlogin                       controllers.SignUpController.add
 GET         /delete/:id                         controllers.CscloudstorageController.deleteUser(id : String)
 POST        /upload                             controllers.CscloudstorageController.upload()
 GET         /gsta                               controllers.CscloudstorageController.gitstatus
+GET         /viweDetail/:id                     controllers.CscloudstorageController.showDetial(id : String)

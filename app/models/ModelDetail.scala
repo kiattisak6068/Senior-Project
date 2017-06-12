@@ -38,7 +38,7 @@ object ObjDetails {
 
   }
 
-  def getUser(userID: String): Future[Option[DBDetail]] = {
+  def getdata(userID: String): Future[Option[DBDetail]] = {
     dbConfig.db.run(detail.filter(_.userID === userID).result.headOption)
   }
 

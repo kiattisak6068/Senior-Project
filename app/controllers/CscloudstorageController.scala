@@ -19,7 +19,7 @@ import scala.concurrent.Future
 import sys.process._
 import java.io.File
 import play.api.libs.json._
-import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.FilenameUtils
 
 /**
  * The basic application controller.
@@ -59,37 +59,6 @@ import org.apache.commons.io.FilenameUtils;
 
       }
 
-  //   def upload = Action { request =>
-  //   request.body.asMultipartFormData.map {a =>
-  //     val datatitle = a.dataParts.get("title").map { a =>
-  //        for{
-  //          b <- a.mkString("")
-  //         }yield b
-  //     }
-  //
-  //     val datadetail = a.dataParts.get("detail").map { a =>
-  //        for{
-  //          b <- a.mkString("")
-  //         }yield b
-  //     }
-  //
-  //     val dataimg = a.file("img").map { a=>
-  //       val filename = a.filename
-  //       a.ref.moveTo(new File(s"public/images/imgCsCloud/$filename"))
-  //       for{
-  //         b <- a.filename
-  //       }yield b
-  //     }
-  //
-  //     val title = getdata(datatitle)
-  //     val detail = getdata(datadetail)
-  //     val img = getdata(dataimg)
-  //
-  //     Redirect("/up")
-  //   }.getOrElse {
-  //     Redirect("/up")
-  //   }
-  // }
     def getdata(x: Option[String]) = x match {
      case Some(s) => s
      case None => ""
@@ -150,5 +119,12 @@ import org.apache.commons.io.FilenameUtils;
     case None => Future.successful(Redirect("/"))
   }
 }
+
+  def showDetial(id: String) = Action.async { implicit request =>
+      ObjDetails.getdata(id).map{ de =>
+        Ok(views.html.showDetial(de))
+      }
+
+  }
 
 }

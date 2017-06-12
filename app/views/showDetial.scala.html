@@ -1,0 +1,54 @@
+@(detail : Option[models.DBDetail])(implicit request: RequestHeader, messages: Messages)
+
+@maincs() {
+
+      <br>
+              <div class="container">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                  <div class="panel panel-default">
+                    <div class="panel-body">
+                      @for(a <- detail){
+                        <div class="row">
+                          <div class="col-md-4">
+                              <div class="thumbnail">
+                                  <img src="@routes.Assets.at("images/imgCsCloud/")@a.img" alt="">
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                            <h1>@a.topic</h1>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                             <div class="col-md-10">
+                               <p style="width: 800px;word-wrap: break-word;">
+                                  @a.detail
+                             </div>
+                        </div>
+                        <br><br>
+                        <div class="row">
+                            <div class="col-md-6">
+                              <p>
+                                <h4>ผู้รับผิดชอบโครงการ</h4>
+                              </p>
+                              <p>
+                                ตรีภูมิ วัฒราช
+                              </p>
+                            </div>
+                            <div class="col-md-6">
+                              <p>
+                                <h4>ที่ปรึกษาโครงการ</h4>
+                              </p>
+                              <p>
+                                ดร.วิชิต สมบัติ
+                              </p>
+                            </div>
+                        </div>
+                      }
+
+                    </div>
+                    </div>
+                  </div>
+                </div>
+}
