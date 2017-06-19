@@ -1,23 +1,33 @@
 @(user:models.User,roleuser:Option[models.DBUserRole],signInForm: Form[forms.Userform.Data])(implicit request: RequestHeader, messages: Messages)
 
 @import b3.inline.fieldConstructor
-@role = @{ Seq("Student"->"Student","Teacher"->"Teacher","Admin"->"Admin") }
+@role = @{ Seq("นักศึกษา"->"นักศึกษา","อาจารย์"->"อาจารย์","ผู้ดูแลระบบ"->"ผู้ดูแลระบบ") }
 
 @maincs(Some(user),roleuser) {
-    <fieldset class="col-md-6 col-md-offset-3" style="margin-top: -0.75%;">
-        <legend>@Messages("sign.up.account")</legend>
-        @helper.form(action = routes.SignUpController.adduser()) {
-            @helper.CSRF.formField
-            @b3.text(signInForm("firstName"), '_hiddenLabel -> Messages("first.name"), 'placeholder -> Messages("first.name"), 'class -> "form-control input-lg")
-            @b3.text(signInForm("lastName"), '_hiddenLabel -> Messages("last.name"), 'placeholder -> Messages("last.name"), 'class -> "form-control input-lg")
-            @b3.text(signInForm("email"), '_hiddenLabel -> Messages("email"), 'placeholder -> Messages("email"), 'class -> "form-control input-lg")
-            @b3.password(signInForm("password"), '_hiddenLabel -> Messages("password"), 'placeholder -> Messages("password"), 'class -> "form-control input-lg")
-            @b3.select( signInForm("role"), options = role,'class -> "form-control input-lg" )
-            <div class="form-group">
-                <div>
-                    <button id="submit" type="submit" value="submit" class="btn btn-lg btn-primary btn-block">@Messages("sign.up")</button>
-                </div>
+  <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-md-12">
+              <fieldset class="col-md-6 col-md-offset-3" style="margin-top: -0.75%;">
+                  <legend>@Messages("เพิ่มผู้ใช้งานระบบ")</legend>
+                  @helper.form(action = routes.SignUpController.adduser()) {
+                      @helper.CSRF.formField
+                      @b3.text(signInForm("firstName"), '_hiddenLabel -> Messages("first.name"), 'placeholder -> Messages("ชื่อ"), 'class -> "form-control input-lg")
+                      @b3.text(signInForm("lastName"), '_hiddenLabel -> Messages("last.name"), 'placeholder -> Messages("สกุล"), 'class -> "form-control input-lg")
+                      @b3.text(signInForm("email"), '_hiddenLabel -> Messages("email"), 'placeholder -> Messages("อีเมล"), 'class -> "form-control input-lg")
+                      @b3.password(signInForm("password"), '_hiddenLabel -> Messages("password"), 'placeholder -> Messages("รหัสผ่าน"), 'class -> "form-control input-lg")
+                      @b3.select( signInForm("role"), options = role,'class -> "form-control input-lg" )
+                      <div class="form-group">
+                          <div>
+                              <button id="submit" type="submit" value="submit" class="btn btn-lg btn-primary btn-block">@Messages("ยืนยัน")</button>
+                          </div>
+                      </div>
+                  }
+              </fieldset>
             </div>
-        }
-    </fieldset>
+          </div>
+        </div>
+      </div>
+  </div>
 }

@@ -42,6 +42,7 @@ class SignUpController @Inject() (
    *
    * @return The result to display.
    */
+   /*
   def signUp = Action.async { implicit request =>
     SignUpForm.form.bindFromRequest.fold(
       form => Future.successful(BadRequest(views.html.signUp(form))),
@@ -77,7 +78,7 @@ class SignUpController @Inject() (
       }
     )
   }
-
+*/
   def addrole = Action.async { implicit request =>
     Roleform.form.bindFromRequest.fold(
       form => Future.successful(BadRequest(views.html.signUpcs(form))),

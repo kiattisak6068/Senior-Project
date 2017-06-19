@@ -5,7 +5,6 @@
 @maincs(Some(user),roleuser){
   <br>
   <br>
-  <br>
   <div class="col-md-2"></div>
   <div class="col-md-8">
   <div class="panel panel-default">
@@ -79,7 +78,7 @@
                   <div class="row">
                       <div class="col-xs-12 ">
                           <div class="well">
-                            <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%" >
+                            <table id="example2" class="table table-striped table-bordered" cellspacing="0" width="100%" >
                               <thead>
                                 <tr>
                                   <th>Full Name</th>
@@ -113,3 +112,14 @@
     document.getElementById("link").onclick = $('#myModallogin').modal('show');
   </script>
 }
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#example').DataTable();
+  } );
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#example2').DataTable();
+  } );
+</script>
