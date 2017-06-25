@@ -79,13 +79,31 @@ import org.apache.commons.io.FilenameUtils
            b <- a.mkString("")
           }yield b
       }
-
       val datadetail = a.dataParts.get("detail").map { a =>
          for{
            b <- a.mkString("")
           }yield b
       }
-
+      val datadetail2 = a.dataParts.get("detail2").map { a =>
+         for{
+           b <- a.mkString("")
+          }yield b
+      }
+      val datadetail3 = a.dataParts.get("detail3").map { a =>
+         for{
+           b <- a.mkString("")
+          }yield b
+      }
+      val datadetail4 = a.dataParts.get("detail4").map { a =>
+         for{
+           b <- a.mkString("")
+          }yield b
+      }
+      val datadetail5 = a.dataParts.get("detail5").map { a =>
+         for{
+           b <- a.mkString("")
+          }yield b
+      }
       val dataimg = a.file("img").map { a=>
         val filename = a.filename
         val extension = FilenameUtils.getExtension(filename)
@@ -95,36 +113,92 @@ import org.apache.commons.io.FilenameUtils
           b <- newFileName
         }yield b
       }
-
       val title = getdata(datatitle)
       val detail = getdata(datadetail)
+      val detail2 = getdata(datadetail2)
+      val detail3 = getdata(datadetail3)
+      val detail4 = getdata(datadetail4)
+      val detail5 = getdata(datadetail5)
       val img = getdata(dataimg)
-
       val datatodb = DBDetail (
         userID = user.userID.toString,
         topic = title,
         detail = detail,
+        objective = detail2,
+        scope = detail3,
+        technology = detail4,
+        benefits = detail5,
         img = img
       )
-
       val saveData = for{
           a <- ObjDetails.add(datatodb)
       }yield a
-
-      Future.successful(Ok(""+dataimg))
+      Future.successful(Redirect("/up"))
     }.getOrElse {
       Future.successful(Redirect("/up"))
     }
-
     case None => Future.successful(Redirect("/"))
   }
 }
 
   def showDetial(id: String) = Action.async { implicit request =>
-      ObjDetails.getdata(id).map{ de =>
-        Ok(views.html.showDetial(de))
-      }
 
+        val data = for{
+          dataDetail <- ObjDetails.getdata(id)
+          reUser <- Advisers.getRelation(id)
+          s <- ListUser.getUser(getdata(reUser.map { s => s.stuID}))
+          t <- ListUser.getUser(getdata(reUser.map { t => t.teaID}))
+        }yield (dataDetail,s,t)
+
+        data.map { case (dataDetail,stu,tea) =>
+
+            Ok(views.html.showDetial(dataDetail,stu,tea))
+        }
+
+  }
+
+  var projectID = "";
+  def viewDetial(id: String) = UserAwareAction.async { implicit request =>
+    request.identity match {
+      case Some(user) =>
+        projectID = id
+        val data = for{
+          dataDetail <- ObjDetails.getdata(id)
+          reUser <- Advisers.getRelation(id)
+          s <- ListUser.getUser(getdata(reUser.map { s => s.stuID}))
+          t <- ListUser.getUser(getdata(reUser.map { t => t.teaID}))
+          r <- Userroles.get(user.userID.toString)
+          c <- ObjComment.listAll
+        }yield (r,dataDetail,s,t,c)
+        data.map { case (role,dataDetail,stu,tea,comment) =>
+            Ok(views.html.viewDetial(Commentform.form,user,role,dataDetail,stu,tea,comment))
+        }
+      case None => Future.successful(Redirect("/"))
+    }
+  }
+
+  def commentProject = UserAwareAction.async { implicit request =>
+    request.identity match {
+      case Some(user) =>
+      Commentform.form.bindFromRequest.fold(
+        form => Future.successful(Redirect("/showdetail")),
+        data => {
+              val com = DBComment (
+                id  = Some(0),
+                detail = data.comment,
+                userID = user.userID.toString,
+                projectID = projectID
+              )
+              val save = for{
+                add <- ObjComment.add(com)
+              }yield add
+
+              Future.successful(Redirect("/"))
+
+        }
+      )
+      case None => Future.successful(Redirect("/"))
+    }
   }
 
 }

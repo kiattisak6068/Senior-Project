@@ -40,8 +40,13 @@ class ApplicationController @Inject() (
   def index = UserAwareAction.async { implicit request =>
   request.identity match {
     case Some(user) =>
-      Userroles.get(user.userID.toString).map{ role =>
-        Ok(views.html.homecs(user,role))
+      val data = for{
+        role <- Userroles.get(user.userID.toString)
+        detail <- ObjDetails.listAll
+        tea <- ListUser.listUserTeacher
+      }yield (role,detail,tea)
+      data.map{ case (role,detail,tea) =>
+        Ok(views.html.homecs(user,role,detail,tea))
       }
     case None =>
       ObjDetails.listAll.map { detail =>
@@ -240,9 +245,6 @@ class ApplicationController @Inject() (
     case None => Future.successful(Redirect("/"))
   }
 }
-
-
-
 
 
 }

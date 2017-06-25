@@ -14,6 +14,10 @@ case class DBDetail (
   userID: String,
   topic: String,
   detail: String,
+  objective: String,
+  scope: String,
+  technology: String,
+  benefits: String,
   img: String
 )
 
@@ -21,8 +25,12 @@ class Detail(tag: Tag) extends Table[DBDetail](tag, "detail") {
   def userID = column[String]("userID", O.PrimaryKey)
   def topic = column[String]("topic")
   def detail = column[String]("detail")
+  def objective = column[String]("objective")
+  def scope = column[String]("scope")
+  def technology = column[String]("technology")
+  def benefits = column[String]("benefits")
   def img = column[String]("img")
-  def * = (userID, topic, detail, img) <> (DBDetail.tupled, DBDetail.unapply)
+  def * = (userID, topic, detail,objective,scope,technology,benefits, img) <> (DBDetail.tupled, DBDetail.unapply)
 }
 
 object ObjDetails {

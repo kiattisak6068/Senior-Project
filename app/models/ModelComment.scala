@@ -23,7 +23,7 @@ case class MComment (
   projectID: String
 )
 
-class Comment(tag: Tag) extends Table[DBComment](tag, "comment") {
+class Comment(tag: Tag) extends Table[DBComment](tag, "commentProject") {
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
   def detail = column[String]("detail")
   def userID = column[String]("userID")
@@ -37,16 +37,9 @@ object ObjComment {
 
   val com = TableQuery[Comment]
 
-  def add(comment: MComment): Future[String] = {
+  def add(comment: DBComment): Future[String] = {
 
-    val a = DBComment(
-      id = Some(0),
-      detail = comment.detail,
-      userID = comment.userID,
-      projectID = comment.projectID
-    )
-
-    dbConfig.db.run(com += a).map(res => "successfully").recover {
+    dbConfig.db.run(com += comment).map(res => "successfully").recover {
       case ex: Exception => ex.getCause.getMessage
     }
 
