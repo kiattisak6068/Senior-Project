@@ -10,6 +10,7 @@ import slick.driver.H2Driver.api._
 import scala.concurrent.ExecutionContext.Implicits.global
 import slick.lifted.ProvenShape.proveShapeOf
 
+
 case class DBDetail (
   userID: String,
   topic: String,
@@ -18,8 +19,10 @@ case class DBDetail (
   scope: String,
   technology: String,
   benefits: String,
-  img: String
+  img: String,
+  tea : String
 )
+
 
 class Detail(tag: Tag) extends Table[DBDetail](tag, "detail") {
   def userID = column[String]("userID", O.PrimaryKey)
@@ -30,7 +33,8 @@ class Detail(tag: Tag) extends Table[DBDetail](tag, "detail") {
   def technology = column[String]("technology")
   def benefits = column[String]("benefits")
   def img = column[String]("img")
-  def * = (userID, topic, detail,objective,scope,technology,benefits, img) <> (DBDetail.tupled, DBDetail.unapply)
+  def tea = column[String]("tea")
+  def * = (userID, topic, detail,objective,scope,technology,benefits, img,tea) <> (DBDetail.tupled, DBDetail.unapply)
 }
 
 object ObjDetails {
@@ -38,6 +42,7 @@ object ObjDetails {
   val dbConfig = DatabaseConfigProvider.get[JdbcProfile](Play.current)
 
   val detail = TableQuery[Detail]
+
 
   def add(de: DBDetail): Future[String] = {
     dbConfig.db.run(detail += de).map(res => "successfully").recover {
@@ -56,5 +61,12 @@ object ObjDetails {
 
   def delete(userID: String): Future[Int] = {
     dbConfig.db.run(detail.filter(_.userID === userID).delete)
+  }
+
+  def search(text : String): Future[Seq[DBDetail]] = {
+    val query = for {
+      de <- detail if (de.topic like "%"+text+"%") || (de.technology like "%"+text+"%") || (de.tea like "%"+text+"%")
+    } yield (de)
+    dbConfig.db.run(query.result)
   }
 }

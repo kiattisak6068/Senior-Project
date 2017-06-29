@@ -370,3 +370,805 @@ org.h2.message.DbException: The connection was not closed by the application and
 Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-188]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
 	... 16 more
+2017-06-27 15:37:02 jdbc[940]: exception
+org.h2.jdbc.JdbcSQLException: Column "TOPIC" not found; SQL statement:
+SELECT * FROM "detail"
+WHERE topic like '%p%' [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.CompareLike.optimize(CompareLike.java:87)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 15:37:08 jdbc[940]: exception
+org.h2.jdbc.JdbcSQLException: Column "TOPIC" not found; SQL statement:
+SELECT * FROM "detail"
+WHERE topic like '%a%' [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.CompareLike.optimize(CompareLike.java:87)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 15:37:26 jdbc[940]: exception
+org.h2.jdbc.JdbcSQLException: Column "TOPIC" not found; SQL statement:
+SELECT * FROM "detail"
+WHERE TOPIC like '%a%' [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.CompareLike.optimize(CompareLike.java:87)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 15:37:42 jdbc[940]: exception
+org.h2.jdbc.JdbcSQLException: Column "TOPIC" not found; SQL statement:
+SELECT * FROM "detail"
+WHERE "TOPIC" like '%a%' [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.CompareLike.optimize(CompareLike.java:87)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 15:37:58 jdbc[940]: exception
+org.h2.jdbc.JdbcSQLException: Table "DETAIL" not found; SQL statement:
+SELECT * FROM detail
+WHERE "TOPIC" like '%a%' [42102-188]
+2017-06-27 15:38:04 jdbc[940]: exception
+org.h2.jdbc.JdbcSQLException: Table "DETAIL" not found; SQL statement:
+SELECT  FROM detail
+WHERE "TOPIC" like '%a%' [42102-188]
+2017-06-27 15:38:11 jdbc[940]: exception
+org.h2.jdbc.JdbcSQLException: Table "DETAIL" not found; SQL statement:
+SELECT  TOPIC FROM detail
+WHERE "TOPIC" like '%a%' [42102-188]
+2017-06-27 15:39:04 jdbc[940]: exception
+org.h2.jdbc.JdbcSQLException: Column "TOPIC" not found; SQL statement:
+SELECT "topic" FROM "detail" WHERE topic like '%a%' [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.CompareLike.optimize(CompareLike.java:87)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:10:20 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "TOPIC" not found; SQL statement:
+SELECT * FROM "detail"
+where topic like '%a%' [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.CompareLike.optimize(CompareLike.java:87)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:10:37 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM ""detail""
+WHERE TOPIC LIKE %[*]A% "; expected "SELECT, FROM"; SQL statement:
+SELECT * FROM "detail"
+where topic like %a% [42001-188]
+2017-06-27 16:12:04 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "TOPIC" not found; SQL statement:
+SELECT * FROM "detail"
+where topic [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:12:31 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "TOPIC" not found; SQL statement:
+SELECT * FROM "detail"
+where topic like "%a%" [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.CompareLike.optimize(CompareLike.java:87)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:12:43 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "TOPIC" not found; SQL statement:
+SELECT * FROM "detail"
+where "TOPIC" like "%a%" [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.CompareLike.optimize(CompareLike.java:87)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:12:59 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "TOPIC" not found; SQL statement:
+SELECT topic FROM "detail"
+where "TOPIC" like "%a%" [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.command.dml.Select.prepare(Select.java:835)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:13:20 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "TOPIC" not found; SQL statement:
+SELECT * FROM "detail"
+where "TOPIC" like "%a%" [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.CompareLike.optimize(CompareLike.java:87)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:16:03 jdbc[1002]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:72)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:92)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:98)
+	at com.zaxxer.hikari.pool.BaseHikariPool.addConnection(BaseHikariPool.java:438)
+	at com.zaxxer.hikari.pool.BaseHikariPool$1.run(BaseHikariPool.java:413)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 16 more
+2017-06-27 16:16:37 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "TOPIC" not found; SQL statement:
+SELECT * FROM "detail"
+where "TOPIC" = 'a' [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:16:50 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "TOPIC" not found; SQL statement:
+SELECT * FROM "detail"
+where "TOPIC" = "a" [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:27:00 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Table "DETAIL" not found; SQL statement:
+SELECT * FROM detail [42102-188]
+2017-06-27 16:30:01 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "X.TOPIC" not found; SQL statement:
+SELECT * FROM "detail" x
+where x.topic = "a" [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:34:52 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "X.TOPIC" not found; SQL statement:
+SELECT * FROM  "detail"  x
+where x.topic = "a" [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:35:12 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "X.TOPIC" not found; SQL statement:
+SELECT * FROM   "detail" as x
+where x.topic = "a" [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:37:15 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "TOPIC" not found; SQL statement:
+SELECT * FROM "detail" 
+WHERE topic LIKE "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.CompareLike.optimize(CompareLike.java:87)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:37:27 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM ""detail"" 
+WHERE TOPIC %LIKE[*] ""aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"" "; expected "SELECT, FROM"; SQL statement:
+SELECT * FROM "detail" 
+WHERE topic %LIKE "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" [42001-188]
+2017-06-27 16:37:33 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "TOPIC" not found; SQL statement:
+SELECT * FROM "detail" 
+WHERE topic = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:37:50 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "TOPIC" not found; SQL statement:
+SELECT * FROM "detail" 
+WHERE topic = "a" [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:178)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:38:10 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "TOPIC" not found; SQL statement:
+SELECT * FROM "detail" 
+WHERE topic LIKE "a" [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.CompareLike.optimize(CompareLike.java:87)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:38:58 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM ""detail"" 
+WHRER USERID[*] = ""d98028e4-81b0-4936-93c0-10fda32b023c"" "; SQL statement:
+SELECT * FROM "detail" 
+WHRER userID = "d98028e4-81b0-4936-93c0-10fda32b023c" [42000-188]
+2017-06-27 16:39:09 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM ""detail"" 
+WHRER USERID[*] =  D98028E4-81B0-4936-93C0-10FDA32B023C "; SQL statement:
+SELECT * FROM "detail" 
+WHRER userID =  d98028e4-81b0-4936-93c0-10fda32b023c [42000-188]
+2017-06-27 16:39:20 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM ""detail"" 
+WHRER USERID[*]  LIKE  D98028E4-81B0-4936-93C0-10FDA32B023C "; SQL statement:
+SELECT * FROM "detail" 
+WHRER userID  LIKE  d98028e4-81b0-4936-93c0-10fda32b023c [42000-188]
+2017-06-27 16:40:04 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM ""detail"" 
+WHRER USERID[*]  LIKE  D98028E4-81B0-4936-93C0-10FDA32B023C "; SQL statement:
+SELECT * FROM "detail" 
+WHRER userID  LIKE  d98028e4-81b0-4936-93c0-10fda32b023c [42000-188]
+2017-06-27 16:40:13 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "WHRER[*] USERID  LIKE  D98028E4-81B0-4936-93C0-10FDA32B023C "; expected "WITH, {"; SQL statement:
+WHRER userID  LIKE  d98028e4-81b0-4936-93c0-10fda32b023c [42001-188]
+2017-06-27 16:40:56 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "WHRER[*] USERID  %LIKE  D98028E4-81B0-4936-93C0-10FDA32B023C "; expected "WITH, {"; SQL statement:
+WHRER userID  %LIKE  d98028e4-81b0-4936-93c0-10fda32b023c [42001-188]
+2017-06-27 16:41:22 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "WHRER[*] USERID  =  D98028E4-81B0-4936-93C0-10FDA32B023C "; expected "WITH, {"; SQL statement:
+WHRER userID  =  d98028e4-81b0-4936-93c0-10fda32b023c [42001-188]
+2017-06-27 16:41:35 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "WHRER[*] USERID  =  ""d98028e4-81b0-4936-93c0-10fda32b023c"" "; expected "WITH, {"; SQL statement:
+WHRER userID  =  "d98028e4-81b0-4936-93c0-10fda32b023c" [42001-188]
+2017-06-27 16:41:51 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "WHRER userID  =  [*]""d98028e4-81b0-4936-93c0-10fda32b023c ;"; SQL statement:
+WHRER userID  =  "d98028e4-81b0-4936-93c0-10fda32b023c ; [42000-188]
+2017-06-27 16:42:41 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "WHRER[*] USERID  %LIKE  ""d98028e4-81b0-4936-93c0-10fda32b023c"" "; expected "WITH, {"; SQL statement:
+WHRER userID  %LIKE  "d98028e4-81b0-4936-93c0-10fda32b023c" [42001-188]
+2017-06-27 16:43:08 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "WHRER[*] USERID  LIKE  ""d98028e4-81b0-4936-93c0-10fda32b023c%"" "; expected "WITH, {"; SQL statement:
+WHRER userID  LIKE  "d98028e4-81b0-4936-93c0-10fda32b023c%" [42001-188]
+2017-06-27 16:43:21 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "WHRER[*] USERID  LIKE  ""%d98028e4-81b0-4936-93c0-10fda32b023c%"" "; expected "WITH, {"; SQL statement:
+WHRER userID  LIKE  "%d98028e4-81b0-4936-93c0-10fda32b023c%" [42001-188]
+2017-06-27 16:43:39 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "WHRER[*] USERID  LIKE  %D98028E4-81B0-4936-93C0-10FDA32B023C% "; expected "WITH, {"; SQL statement:
+WHRER userID  LIKE  %d98028e4-81b0-4936-93c0-10fda32b023c% [42001-188]
+2017-06-27 16:45:33 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "NAME" not found; SQL statement:
+SELECT * FROM "detail" ORDER BY NAME [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.command.dml.Select.prepare(Select.java:835)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:45:50 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "TOPIC" not found; SQL statement:
+SELECT * FROM "detail" ORDER BY topic [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.command.dml.Select.prepare(Select.java:835)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:46:33 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "TOPIC" not found; SQL statement:
+SELECT * FROM "detail" ORDER BY topic [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.command.dml.Select.prepare(Select.java:835)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:47:41 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" not found; SQL statement:
+SELECT * FROM "detail" 
+WHERE "topic"  LIKE aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.CompareLike.optimize(CompareLike.java:88)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:47:55 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" not found; SQL statement:
+SELECT * FROM "detail" 
+WHERE "topic"  LIKE "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.CompareLike.optimize(CompareLike.java:88)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:48:09 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "%aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa%" not found; SQL statement:
+SELECT * FROM "detail" 
+WHERE "topic"  LIKE  "%aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa%" [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.CompareLike.optimize(CompareLike.java:88)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:48:21 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "%aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa%" not found; SQL statement:
+SELECT * FROM "detail" 
+WHERE "topic"  =  "%aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa%" [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:180)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:48:46 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" not found; SQL statement:
+SELECT * FROM "detail" 
+WHERE "topic"  =  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:180)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:49:21 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM ""detail"" ,
+WHERE[*] ""topic""    ""aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"""; expected "identifier"; SQL statement:
+SELECT * FROM "detail" ,
+WHERE "topic"    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" [42001-188]
+2017-06-27 16:50:45 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" not found; SQL statement:
+SELECT * FROM "detail" 
+WHERE "topic" LIKE "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.CompareLike.optimize(CompareLike.java:88)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:51:15 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "%aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa%" not found; SQL statement:
+SELECT * FROM "detail" 
+WHERE "topic" LIKE "%aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa%" [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.CompareLike.optimize(CompareLike.java:88)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2017-06-27 16:55:30 jdbc[1001]: exception
+org.h2.jdbc.JdbcSQLException: Column "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" not found; SQL statement:
+SELECT * FROM "detail" 
+WHERE "topic"  =aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
+	at org.h2.expression.Comparison.optimize(Comparison.java:180)
+	at org.h2.command.dml.Select.prepare(Select.java:838)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)

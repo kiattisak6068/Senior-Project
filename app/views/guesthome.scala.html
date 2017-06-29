@@ -1,6 +1,6 @@
-@(user: models.User,detail:Seq[models.DBDetail])(implicit request: RequestHeader, messages: Messages)
+@(user: models.User,detail:Seq[models.DBDetail],comment : Form[forms.Commentform.Data])(implicit request: RequestHeader, messages: Messages)
 
-@maincs() {
+@maincs(comment) {
 
   <!-- Page Content -->
   <div class="container">
@@ -23,6 +23,7 @@
                     </div>
                   }
               </div>
+
 
           </div>
 

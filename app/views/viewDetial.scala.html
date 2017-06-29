@@ -1,6 +1,6 @@
-@(Forms: Form[forms.Commentform.Data],user: models.User,role:Option[models.DBUserRole],detail : Option[models.DBDetail],stu : Option[models.DBUser],tea : Option[models.DBUser],comment : Seq[models.DBComment])(implicit request: RequestHeader, messages: Messages)
+@(Forms: Form[forms.Commentform.Data],user: models.User,role:Option[models.DBUserRole],detail : Option[models.DBDetail],stu : Option[models.DBUser],tea : Option[models.DBUser],comment : Seq[models.DBComment],list : Seq[models.DBUser],com : Form[forms.Commentform.Data])(implicit request: RequestHeader, messages: Messages)
 @import b3.inline.fieldConstructor
-@maincs(Some(user),role) {
+@maincs(com,Some(user),role) {
 
       <br>
               <div class="container">
@@ -100,12 +100,19 @@
 
                         <br>
                         <hr>
+                        @for(d <- detail){
                         @for(c <- comment){
-                          @c.userID
-                          <br>
-                          @c.detail
+                          @if(d.userID == c.projectID){
+                          @for(u <- list){
+                            @if(c.userID == u.userID){
+                              <p style="color : blue">@u.fullName</p>
+                            }
+                          }
+                          &nbsp;&nbsp;&nbsp;@c.detail
                           <br>
                         }
+                        }
+                      }
 
                     </div>
                   </div>

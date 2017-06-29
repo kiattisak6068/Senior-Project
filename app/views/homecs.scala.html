@@ -1,6 +1,6 @@
-@(user: models.User,role:Option[models.DBUserRole],detail:Seq[models.DBDetail],tea:Seq[models.Modellist])(implicit request: RequestHeader, messages: Messages)
+@(user: models.User,role:Option[models.DBUserRole],detail:Seq[models.DBDetail],comment : Form[forms.Commentform.Data])(implicit request: RequestHeader, messages: Messages)
 
-@maincs(Some(user),role) {
+@maincs(comment,Some(user),role) {
   <!-- Page Content -->
   <div class="container">
 

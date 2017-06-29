@@ -1,4 +1,5 @@
-@(user: Option[models.User] = None,roleUser:Option[models.DBUserRole]= None)(content: Html)(implicit request: RequestHeader, messages: Messages)
+@(comment : Form[forms.Commentform.Data],user: Option[models.User] = None,roleUser:Option[models.DBUserRole]= None)(content: Html)(implicit request: RequestHeader, messages: Messages)
+@import b3.inline.fieldConstructor
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +35,6 @@
         .body{
           background-color: #c3c3c3;
         }
-
         </style>
     </head>
     <body class="body">
@@ -51,18 +51,14 @@
                 </div>
                 <nav class="collapse navbar-collapse">
                     <div class="nav navbar-nav">
-                      <form class="navbar-form navbar-left">
-                        <div class="dropdown">
-                          <select class="form-control" >
-                            <option value="volvo">--อาจารย์--</option>
-                            <option value="saab">Saab</option>
-                            <option value="opel">Opel</option>
-                            <option value="audi">Audi</option>
-                          </select>
-                        <input type="text" placeholder="Search" class="form-control">
-                        <button type="submit" class="btn btn-primary" style="margin-top:-0.4%"><i class="fa fa-search" aria-hidden="true"></i></button>
-                        </div>
-                      </form>
+                      @helper.form(action = routes.CscloudstorageController.search() ,'class -> "navbar-form navbar-left") {
+                          @helper.CSRF.formField
+                          @b3.text( comment("comment"), 'class -> "form-control" )
+
+                          <button type="submit" class="btn btn-primary" style="margin-top:-0.4%"><i class="fa fa-search" aria-hidden="true"></i></button>
+
+                      }
+
                     </div>
                     <ul class="nav navbar-nav navbar-right">
                       <li><a class="navbar-brand " href="/" style="color:#222"><i class="fa fa-home" aria-hidden="true"></i> หน้าหลัก </a></li>

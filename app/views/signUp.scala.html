@@ -1,9 +1,9 @@
-@(signInForm: Form[forms.Userform.Data])(implicit request: RequestHeader, messages: Messages)
+@(signInForm: Form[forms.Userform.Data],comment : Form[forms.Commentform.Data])(implicit request: RequestHeader, messages: Messages)
 
 @import b3.inline.fieldConstructor
 @role = @{ Seq("นักศึกษา"->"นักศึกษา","อาจารย์"->"อาจารย์","ผู้ดูแลระบบ"->"ผู้ดูแลระบบ") }
 
-@maincs() {
+@maincs(comment) {
   <div class="col-md-1"></div>
     <div class="col-md-10">
       <div class="panel panel-default">

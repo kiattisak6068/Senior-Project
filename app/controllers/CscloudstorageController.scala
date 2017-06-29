@@ -113,33 +113,40 @@ import org.apache.commons.io.FilenameUtils
           b <- newFileName
         }yield b
       }
-      val title = getdata(datatitle)
-      val detail = getdata(datadetail)
-      val detail2 = getdata(datadetail2)
-      val detail3 = getdata(datadetail3)
-      val detail4 = getdata(datadetail4)
-      val detail5 = getdata(datadetail5)
-      val img = getdata(dataimg)
-      val datatodb = DBDetail (
-        userID = user.userID.toString,
-        topic = title,
-        detail = detail,
-        objective = detail2,
-        scope = detail3,
-        technology = detail4,
-        benefits = detail5,
-        img = img
-      )
-      val saveData = for{
-          a <- ObjDetails.add(datatodb)
-      }yield a
+
+      val get = for{
+        t <- Advisers.getRelation(user.userID.toString)
+        teaName <- ListUser.getUser(getdata(t.map{ a=> a.teaID}))
+      }yield teaName
+      val saveDatatoDB = get.map {data =>
+        data.map {teaID =>
+          val datatodb = DBDetail (
+            userID = user.userID.toString,
+            topic = getdata(datatitle),
+            detail = getdata(datadetail),
+            objective = getdata(datadetail2),
+            scope = getdata(datadetail3),
+            technology = getdata(datadetail4),
+            benefits = getdata(datadetail5),
+            img = getdata(dataimg),
+            tea = getdata(teaID.fullName)
+          )
+          val saveData = for{
+              a <- ObjDetails.add(datatodb)
+          }yield a
+        }
+      }
+
       Future.successful(Redirect("/up"))
+
     }.getOrElse {
       Future.successful(Redirect("/up"))
     }
     case None => Future.successful(Redirect("/"))
+    }
   }
-}
+
+
 
   def showDetial(id: String) = Action.async { implicit request =>
 
@@ -152,7 +159,7 @@ import org.apache.commons.io.FilenameUtils
 
         data.map { case (dataDetail,stu,tea) =>
 
-            Ok(views.html.showDetial(dataDetail,stu,tea))
+            Ok(views.html.showDetial(dataDetail,stu,tea,Commentform.form))
         }
 
   }
@@ -169,9 +176,10 @@ import org.apache.commons.io.FilenameUtils
           t <- ListUser.getUser(getdata(reUser.map { t => t.teaID}))
           r <- Userroles.get(user.userID.toString)
           c <- ObjComment.listAll
-        }yield (r,dataDetail,s,t,c)
-        data.map { case (role,dataDetail,stu,tea,comment) =>
-            Ok(views.html.viewDetial(Commentform.form,user,role,dataDetail,stu,tea,comment))
+          listUser <- ListUser.listAll
+        }yield (r,dataDetail,s,t,c,listUser)
+        data.map { case (role,dataDetail,stu,tea,comment,listUser) =>
+            Ok(views.html.viewDetial(Commentform.form,user,role,dataDetail,stu,tea,comment,listUser,Commentform.form))
         }
       case None => Future.successful(Redirect("/"))
     }
@@ -198,6 +206,37 @@ import org.apache.commons.io.FilenameUtils
         }
       )
       case None => Future.successful(Redirect("/"))
+    }
+  }
+
+  def search = UserAwareAction.async { implicit request =>
+    request.identity match {
+      case Some(user) =>
+      Commentform.form.bindFromRequest.fold(
+        form => Future.successful(Redirect("/")),
+        data => {
+          val dataDB = for{
+            role <- Userroles.get(user.userID.toString)
+            detail <- ObjDetails.search(data.comment)
+          }yield (role,detail)
+
+          dataDB.map{ case (role,detail) =>
+            Ok(views.html.homecs(user,role,detail,Commentform.form))
+          }
+
+        }
+      )
+
+      case None =>
+          Commentform.form.bindFromRequest.fold(
+            form => Future.successful(Redirect("/")),
+            data => {
+              ObjDetails.search(data.comment).map {case (detail) =>
+                Ok(views.html.listfile(detail,Commentform.form))
+                }
+              }
+          )
+        //Future.successful(Ok(views.html.guesthome(UserConstants.guest)))
     }
   }
 

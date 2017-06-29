@@ -1,6 +1,6 @@
-@(detail : Option[models.DBDetail],stu : Option[models.DBUser],tea : Option[models.DBUser])(implicit request: RequestHeader, messages: Messages)
+@(detail : Option[models.DBDetail],stu : Option[models.DBUser],tea : Option[models.DBUser],comment : Form[forms.Commentform.Data])(implicit request: RequestHeader, messages: Messages)
 
-@maincs() {
+@maincs(comment) {
 
       <br>
               <div class="container">

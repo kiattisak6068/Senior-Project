@@ -38,3 +38,4 @@ GET         /gsta                               controllers.CscloudstorageContro
 GET         /viweDetail/:id                     controllers.CscloudstorageController.showDetial(id : String)
 GET         /showdetail/:id                     controllers.CscloudstorageController.viewDetial(id : String)
 POST        /comment                            controllers.CscloudstorageController.commentProject
+GET         /search                             controllers.CscloudstorageController.search

@@ -10,7 +10,7 @@ object Commentform {
 
   val form = Form(
     mapping(
-      "comment" -> nonEmptyText
+      "comment" -> text
     )(Data.apply)(Data.unapply)
   )
 

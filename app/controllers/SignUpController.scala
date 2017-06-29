@@ -81,7 +81,7 @@ class SignUpController @Inject() (
 */
   def addrole = Action.async { implicit request =>
     Roleform.form.bindFromRequest.fold(
-      form => Future.successful(BadRequest(views.html.signUpcs(form))),
+      form => Future.successful(BadRequest(views.html.signUpcs(form,Commentform.form))),
       data => {
             val roleuser = DBUserRole(
               userID = UUID.randomUUID.toString,

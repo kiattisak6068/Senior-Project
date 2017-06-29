@@ -1,0 +1,8 @@
+@(detail:Seq[models.DBDetail],comment: Form[forms.Commentform.Data])(implicit request: RequestHeader, messages: Messages)
+
+@maincs(comment){
+    @for(d <- detail){
+      @d.topic
+      @d.tea
+    }
+}

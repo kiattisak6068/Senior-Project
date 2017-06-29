@@ -43,18 +43,17 @@ class ApplicationController @Inject() (
       val data = for{
         role <- Userroles.get(user.userID.toString)
         detail <- ObjDetails.listAll
-        tea <- ListUser.listUserTeacher
-      }yield (role,detail,tea)
-      data.map{ case (role,detail,tea) =>
-        Ok(views.html.homecs(user,role,detail,tea))
+      }yield (role,detail)
+      data.map{ case (role,detail) =>
+        Ok(views.html.homecs(user,role,detail,Commentform.form))
       }
     case None =>
       ObjDetails.listAll.map { detail =>
-        Ok(views.html.guesthome(UserConstants.guest,detail))
-      }
+        Ok(views.html.guesthome(UserConstants.guest,detail,Commentform.form))
       //Future.successful(Ok(views.html.guesthome(UserConstants.guest)))
+      }
+    }
   }
-}
 
 
   /**
@@ -73,7 +72,7 @@ class ApplicationController @Inject() (
   def signIn = UserAwareAction.async { implicit request =>
     request.identity match {
       case Some(user) => Future.successful(Redirect(routes.ApplicationController.index()))
-      case None => Future.successful(Ok(views.html.signIn(SignInForm.form, socialProviderRegistry)))
+      case None => Future.successful(Ok(views.html.signIn(SignInForm.form, socialProviderRegistry,Commentform.form)))
     }
   }
 
@@ -85,20 +84,20 @@ class ApplicationController @Inject() (
   def signUp = UserAwareAction.async { implicit request =>
     request.identity match {
       case Some(user) => Future.successful(Redirect(routes.ApplicationController.index()))
-      case None => Future.successful(Ok(views.html.signUp(Userform.form)))
+      case None => Future.successful(Ok(views.html.signUp(Userform.form,Commentform.form)))
     }
   }
 
 
   def signUpcs = UserAwareAction.async {implicit request =>
-    Future.successful(Ok(views.html.signUpcs(Roleform.form)))
+    Future.successful(Ok(views.html.signUpcs(Roleform.form,Commentform.form)))
   }
 
   def adduser = UserAwareAction.async {implicit request =>
     request.identity match {
       case Some(user) =>
         Userroles.get(user.userID.toString).map{ role =>
-          Ok(views.html.adduser(user,role,Userform.form))
+          Ok(views.html.adduser(user,role,Userform.form,Commentform.form))
         }
       case None => Future.successful(Redirect(routes.ApplicationController.index()))
     }
@@ -125,7 +124,7 @@ class ApplicationController @Inject() (
         }yield (a,b)
 
         c.map { case (role,users) =>
-            Ok(views.html.listuser(user,users,role))
+            Ok(views.html.listuser(user,users,role,Commentform.form))
         }
 
       case None => Future.successful(Redirect(routes.ApplicationController.index()))
@@ -140,7 +139,7 @@ class ApplicationController @Inject() (
       }yield a
 
       c.map { case (role) =>
-          Ok(views.html.upload(user,role))
+          Ok(views.html.upload(user,role,Commentform.form))
       }
 
       case None => Future.successful(Redirect("/"))
@@ -161,7 +160,7 @@ class ApplicationController @Inject() (
         }yield (a,b,c,d)
 
         c.map { case (role,stu,tea,rela) =>
-            Ok(views.html.relationship(str,user,stu,role,tea,rela))
+            Ok(views.html.relationship(str,user,stu,role,tea,rela,Commentform.form))
         }
 
       case None => Future.successful(Redirect(routes.ApplicationController.index()))
@@ -240,7 +239,7 @@ class ApplicationController @Inject() (
   request.identity match {
     case Some(user) =>
       Userroles.get(user.userID.toString).map{ role =>
-        Ok(views.html.gitupload(user,role))
+        Ok(views.html.gitupload(user,role,Commentform.form))
       }
     case None => Future.successful(Redirect("/"))
   }

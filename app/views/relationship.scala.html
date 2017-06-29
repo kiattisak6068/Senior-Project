@@ -1,8 +1,8 @@
 
-@(str : String,user:models.User,users : Seq[models.Modellist],roleuser:Option[models.DBUserRole],teacher : Seq[models.Modellist],relation : Seq[models.DBAdviser])(implicit request: RequestHeader, messages: Messages)
+@(str : String,user:models.User,users : Seq[models.Modellist],roleuser:Option[models.DBUserRole],teacher : Seq[models.Modellist],relation : Seq[models.DBAdviser],comment : Form[forms.Commentform.Data])(implicit request: RequestHeader, messages: Messages)
+@import scala.util.control._;var a = "n";
 
-
-@maincs(Some(user),roleuser){
+@maincs(comment,Some(user),roleuser){
   <br>
   <br>
   <div class="col-md-2"></div>
@@ -13,9 +13,9 @@
     <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%" >
       <thead>
         <tr>
-          <th>Full Name</th>
-          <th>Teacher</th>
-          <th style="text-align: center;">Action</th>
+          <th>นักศึกษา</th>
+          <th>อาจารย์</th>
+          <th style="text-align: center;"></th>
         </tr>
       </thead>
       <tbody>
@@ -25,35 +25,38 @@
             @if(relation != Nil){
               @for(r <- relation ){
                 @if(u.userID == r.stuID){
+                  @{a = "h"}
                   @for(t <- teacher){
                     @if(r.teaID == t.userID){
                       <td>@t.fullName</td>
                       <td style="text-align: center;" class="col-md-2 col-sm-3">
                       <a href="@routes.ApplicationController.dataUser(u.userID)" data-toggle="modal" id="link">
-                        <button name="@u.userID" class="btn btn-sm  btn-default">Edit</button>
+                        <button name="@u.userID" class="btn btn-sm  btn-default">แก้ไข</button>
                       </a>
                       </td>
                     }
                   }
-                }else{
-                  <td></td>
-                  <td style="text-align: center;" class="col-md-2 col-sm-3">
-                  <a href="@routes.ApplicationController.dataUser(u.userID)" data-toggle="modal" id="link">
-                    <button name="@u.userID" class="btn btn-sm  btn-default">Add</button>
-                  </a>
-                  </td>
                 }
-
               }
+              @if(a == "n"){
+                <td></td>
+                <td style="text-align: center;" class="col-md-2 col-sm-3">
+                  <a href="@routes.ApplicationController.dataUser(u.userID)" data-toggle="modal" id="link">
+                    <button name="@u.userID" class="btn btn-sm  btn-default">เพิ่ม</button>
+                  </a>
+                </td>
+              }
+              @{a = "n"}
             }else{
               <td></td>
               <td style="text-align: center;" class="col-md-2 col-sm-3">
               <a href="@routes.ApplicationController.dataUser(u.userID)" data-toggle="modal" id="link">
-                <button name="@u.userID" class="btn btn-sm  btn-default">Add</button>
+                <button name="@u.userID" class="btn btn-sm  btn-default">เพิ่ม</button>
               </a>
               </td>
             }
       </tr>
+
 
       }
       </tbody>

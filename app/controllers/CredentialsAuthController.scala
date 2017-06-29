@@ -10,7 +10,7 @@ import com.mohiva.play.silhouette.api.util.{ Clock, Credentials }
 import com.mohiva.play.silhouette.impl.authenticators.CookieAuthenticator
 import com.mohiva.play.silhouette.impl.exceptions.IdentityNotFoundException
 import com.mohiva.play.silhouette.impl.providers._
-import forms.SignInForm
+import forms._
 import models.User
 import models.services.UserService
 import net.ceedubs.ficus.Ficus._
@@ -53,7 +53,7 @@ class CredentialsAuthController @Inject() (
    */
   def authenticate = Action.async { implicit request =>
     SignInForm.form.bindFromRequest.fold(
-      form => Future.successful(BadRequest(views.html.signIn(form, socialProviderRegistry))),
+      form => Future.successful(BadRequest(views.html.signIn(form, socialProviderRegistry,Commentform.form))),
       data => {
         val credentials = Credentials(data.email, data.password)
         credentialsProvider.authenticate(credentials).flatMap { loginInfo =>

@@ -1,6 +1,6 @@
-@(user: models.User,role:Option[models.DBUserRole])(implicit request: RequestHeader, messages: Messages)
+@(user: models.User,role:Option[models.DBUserRole],comment : Form[forms.Commentform.Data])(implicit request: RequestHeader, messages: Messages)
 
-@maincs(Some(user),role) {
+@maincs(comment,Some(user),role) {
   <a href="/gsta">
     <button type="button" name="button">Click</button>
   </a>
