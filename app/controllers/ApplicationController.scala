@@ -15,6 +15,8 @@ import scala.concurrent.Future
 import models.daos.UserDAOImpl
 import scala.concurrent.ExecutionContext.Implicits.global
 
+import reflect.io._
+
 /**
  * The basic application controller.
  *
@@ -170,7 +172,6 @@ class ApplicationController @Inject() (
   def dataUser(id : String) = Action {
     dataID = id;
     str = "show";
-
     var n = for{
       b <- ListUser.getUser(dataID)
     }yield b
@@ -178,7 +179,6 @@ class ApplicationController @Inject() (
     for (k <- n){
       i = show(k.get.fullName)
     }
-
     Redirect("/relation")
   }
 
@@ -193,13 +193,19 @@ class ApplicationController @Inject() (
         stuID = dataID,
         teaID = teaID
       )
-      var n = for{
-        c <- Advisers.add(a)
-      }yield c
-
+      var n = Advisers.add(a)
       str = ""
       dataID = ""
-      var r = Seq("git","init","--bare",i).lineStream
+
+      Directory(s"public/members/${dataID}").createDirectory(true)
+      Directory(s"public/members/${dataID}/เอกสารบทที่ 1").createDirectory(true)
+      Directory(s"public/members/${dataID}/เอกสารบทที่ 2").createDirectory(true)
+      Directory(s"public/members/${dataID}/เอกสารบทที่ 3").createDirectory(true)
+      Directory(s"public/members/${dataID}/เอกสารบทที่ 4").createDirectory(true)
+      Directory(s"public/members/${dataID}/เอกสารบทที่ 5").createDirectory(true)
+      Directory(s"public/members/${dataID}/เอกสารบทที่ 6").createDirectory(true)
+      Directory(s"public/members/${dataID}/ไฟล์โครงการ").createDirectory(true)
+      //var r = Seq("git","init","--bare",i).lineStream
       Future.successful(Redirect("/relation"))
 
   }
@@ -217,13 +223,9 @@ class ApplicationController @Inject() (
             stuID = a.stuID,
             teaID = teaID
           )
-          val updatedata = for{
-            c <- Advisers.update(datasave)
-          }yield c
-
+          val updatedata = Advisers.update(datasave)
         }
       }
-
       str = ""
       dataID = ""
       Future.successful(Redirect("/relation"))

@@ -189,7 +189,7 @@ import org.apache.commons.io.FilenameUtils
     request.identity match {
       case Some(user) =>
       Commentform.form.bindFromRequest.fold(
-        form => Future.successful(Redirect("/showdetail")),
+        form => Future.successful(Redirect(s"/showdetail/${projectID}")),
         data => {
               val com = DBComment (
                 id  = Some(0),
@@ -201,8 +201,7 @@ import org.apache.commons.io.FilenameUtils
                 add <- ObjComment.add(com)
               }yield add
 
-              Future.successful(Redirect("/"))
-
+              Future.successful(Redirect(s"/showdetail/${projectID}"))
         }
       )
       case None => Future.successful(Redirect("/"))
@@ -239,5 +238,24 @@ import org.apache.commons.io.FilenameUtils
         //Future.successful(Ok(views.html.guesthome(UserConstants.guest)))
     }
   }
+
+  def deleteComment(id : Long,str :String) = UserAwareAction.async { implicit request =>
+    request.identity match {
+      case Some(user) =>
+        val delete = ObjComment.delete(id)
+        Future.successful(Redirect(s"/showdetail/${str}"))
+      case None =>Future.successful(Redirect("/"))
+    }
+  }
+
+  def editComment(id : Long,str :String) = UserAwareAction.async { implicit request =>
+    request.identity match {
+      case Some(user) =>
+        
+        Future.successful(Redirect(s"/showdetail/${str}"))
+      case None =>Future.successful(Redirect("/"))
+    }
+  }
+
 
 }
