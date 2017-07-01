@@ -1,8 +1,74 @@
-@(detail:Seq[models.DBDetail],comment: Form[forms.Commentform.Data])(implicit request: RequestHeader, messages: Messages)
 
-@maincs(comment){
-    @for(d <- detail){
-      @d.topic
-      @d.tea
-    }
+@(file : Array[java.io.File],comment: Form[forms.Commentform.Data],user:models.User,roleuser:Option[models.DBUserRole])(implicit request: RequestHeader, messages: Messages)
+
+@maincs(comment,Some(user),roleuser){
+<style media="screen">
+
+</style>
+  <fieldset class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p>
+          <i class="fa fa-folder" aria-hidden="true"></i></i><font color = "blue" > &nbsp; projectID</font>
+          <span style="float: right ;"><button type="button" name="uploadfile" data-toggle="modal" data-target="#myModal"><i class="fa fa-upload" aria-hidden="true"></i> อัพโหลด</button></span>
+        <p>
+
+        <table class="table table-striped">
+        @for(f <- file){
+          <tr>
+            <td><i class="fa fa-folder-open" aria-hidden="true"></i><a herf="#">  @f.getName </a><td>
+          </tr>
+
+        }
+        <table>
+      </div>
+    </div>
+  </fieldset>
+
+  <!--dialog เพิ่ม-->
+  <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+              <div class="modal-header">
+                <a href="/clear">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </a>
+                  <h4 class="modal-title" id="myModalLabel"><i class="fa fa-upload" aria-hidden="true"></i> อัพโหลด</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="row">
+                    <div class="col-xs-12 ">
+                      <div class="well">
+                        @helper.form(routes.CscloudstorageController.uploadFile, 'enctype -> "multipart/form-data") {
+                          @helper.CSRF.formField
+
+                            <select name="pointer" class="form-control">
+                              <option value="เอกสารบทที่ 1">เอกสารบทที่ 1</option>
+                              <option value="เอกสารบทที่ 2">เอกสารบทที่ 2</option>
+                              <option value="เอกสารบทที่ 3">เอกสารบทที่ 3</option>
+                              <option value="เอกสารบทที่ 4">เอกสารบทที่ 4</option>
+                              <option value="เอกสารบทที่ 5">เอกสารบทที่ 5</option>
+                              <option value="เอกสารบทที่ 1">เอกสารบทที่ 6</option>
+                              <option value="ไฟล์โครงการ">ไฟล์โครงการ</option>
+                            </select>
+                            <br>
+                            <input id="uploadBtn" name="uploadBtn" type="file" class="upload form-control" />
+                            <div class=" text-right" >
+                                 <button type="submit" class="btn btn-info">ตกลง</button>
+                             </div>
+                        }
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <!--dialog เพิ่ม-->
 }
+<script type="text/javascript">
+  document.getElementById("uploadBtn").onchange = function () {
+    document.getElementById("uploadFile").value = this.value;
+  };
+</script>

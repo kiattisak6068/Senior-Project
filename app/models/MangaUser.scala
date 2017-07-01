@@ -88,7 +88,7 @@ def listUserStudent: Future[Seq[Modellist]] = {
   val models = for{
     a <- users
     b <- slickUsersRole
-    if a.id === b.userID && b.role === "นักศึกษา" || b.role === "นักศึกษาโปรเจค"
+    if (a.id === b.userID && b.role === "นักศึกษา") || (a.id === b.userID && b.role === "นักศึกษาโปรเจค")
   }yield (a,b)
   dbConfig.db.run(models.result).map{ userseq =>
     userseq.map{
@@ -110,7 +110,7 @@ def listUserTeacher: Future[Seq[Modellist]] = {
   val models = for{
     a <- users
     b <- slickUsersRole
-    if a.id === b.userID && b.role === "อาจารย์"
+    if (a.id === b.userID && b.role === "อาจารย์")
   }yield (a,b)
   dbConfig.db.run(models.result).map{ userseq =>
     userseq.map{

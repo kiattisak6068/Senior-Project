@@ -64,24 +64,30 @@
                     <ul class="nav navbar-nav navbar-right">
                       <li><a class="navbar-brand " href="/" style="color:#222"><i class="fa fa-home" aria-hidden="true"></i> หน้าหลัก </a></li>
                       @user.map { u =>
+                        @roleUser.map { r =>
+                          @if(r.role != "นักศึกษา"){
+                            <li>
+                              <a href="#" class="navbar-brand" style="color:#222" role="button" data-toggle="dropdown"><i class="fa fa-bars" aria-hidden="true"> เมนู</i> <span class="caret"></a>
+                                <ul class="dropdown-menu">
+                                  @if(r.role == "ผู้ดูแลระบบ"){
+                                    <li><a href="/gotoadduser" > <i class="fa fa-user-plus" aria-hidden="true"></i> เพิ่มผู้ใช้งานระบบ </a></li>
+                                    <li><a href="/pagelist" > <i class="fa fa-user-times" aria-hidden="true"></i> จัดการผู้ใช้งานระบบ </a></li>
+                                    <li><a href="/relation" > <i class="fa fa-handshake-o" aria-hidden="true"></i> จัดการที่ปรึกษาโครงการ </a></li>
 
-                        <li>
-                          <a href="#" class="navbar-brand" style="color:#222" role="button" data-toggle="dropdown"><i class="fa fa-bars" aria-hidden="true"> เมนู</i> <span class="caret"></a>
-                            <ul class="dropdown-menu">
-                              @roleUser.map { r =>
-                                @if(r.role == "ผู้ดูแลระบบ"){
-                                  <li><a href="/gotoadduser" > <i class="fa fa-user-plus" aria-hidden="true"></i> เพิ่มผู้ใช้งานระบบ </a></li>
-                                  <li><a href="/pagelist" > <i class="fa fa-user-times" aria-hidden="true"></i> จัดการผู้ใช้งานระบบ </a></li>
-                                  <li><a href="/relation" > <i class="fa fa-handshake-o" aria-hidden="true"></i> จัดการที่ปรึกษาโครงการ </a></li>
+                                  }
+                                  @if(r.role == "อาจารย์"){
+                                    <li><a href="@routes.CscloudstorageController.listfiles(u.userID.toString)" > <i class="fa fa-user" aria-hidden="true"></i> โครงการ </a></li>
+                                  }
+                                  @if(r.role == "นักศึกษาโปรเจค"){
+                                    <li><a href="@routes.CscloudstorageController.listfiles(u.userID.toString)" > <i class="fa fa-user" aria-hidden="true"></i> โครงการ </a></li>
+                                    <li><a href="/up" > <i class="fa fa-user" aria-hidden="true"></i> จัดการข้อมูลรายละเอียด </a></li>
+                                  }
 
-                                }
-                                @if(r.role == "นักศึกษา"){
-                                  <li><a href="/up" > <i class="fa fa-user" aria-hidden="true"></i> รายละเอียด </a></li>
-                                }
-                              }
 
-                            </ul>
-                        </li>
+                              </ul>
+                            </li>
+                            }
+                          }
 
                           <li class="dropdown">
                             <a href="#" class="navbar-brand" role="button" data-toggle="dropdown"style="color:#222"><i class="fa fa-user" aria-hidden="true"></i> @u.firstName <span class="caret"></span></a>

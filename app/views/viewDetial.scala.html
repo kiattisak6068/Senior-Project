@@ -106,7 +106,7 @@
                             @if(c.userID == u.userID){
                               <p><i class="fa fa-user" aria-hidden="true"></i><font color = "blue" > &nbsp; @u.fullName</font>
                                 @if(user.userID.toString == u.userID){
-                                    &nbsp;
+                                    &nbsp;<span style="float: right">
                                     @c.id.map{ a =>
                                       <a href="@routes.CscloudstorageController.deleteComment(a,c.projectID)"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                     }

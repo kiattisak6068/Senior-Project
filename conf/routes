@@ -39,4 +39,6 @@ GET         /viweDetail/:id                     controllers.CscloudstorageContro
 GET         /showdetail/:id                     controllers.CscloudstorageController.viewDetial(id : String)
 POST        /comment                            controllers.CscloudstorageController.commentProject
 GET         /search                             controllers.CscloudstorageController.search
-GET        /deleteComment/:str                  controllers.CscloudstorageController.deleteComment(id : Long,str : String)                
+GET        /deleteComment/:str                  controllers.CscloudstorageController.deleteComment(id : Long,str : String)
+GET        /listfile/:id                        controllers.CscloudstorageController.listfiles(id : String)
+POST       /uploadFile                          controllers.CscloudstorageController.uploadFile

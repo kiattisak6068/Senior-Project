@@ -193,9 +193,8 @@ class ApplicationController @Inject() (
         stuID = dataID,
         teaID = teaID
       )
+      val getrole = Userroles.update(dataID)
       var n = Advisers.add(a)
-      str = ""
-      dataID = ""
 
       Directory(s"public/members/${dataID}").createDirectory(true)
       Directory(s"public/members/${dataID}/เอกสารบทที่ 1").createDirectory(true)
@@ -205,7 +204,10 @@ class ApplicationController @Inject() (
       Directory(s"public/members/${dataID}/เอกสารบทที่ 5").createDirectory(true)
       Directory(s"public/members/${dataID}/เอกสารบทที่ 6").createDirectory(true)
       Directory(s"public/members/${dataID}/ไฟล์โครงการ").createDirectory(true)
-      //var r = Seq("git","init","--bare",i).lineStream
+      Directory(s"public/members/${dataID}/รูปภาพ").createDirectory(true)
+
+      str = ""
+      dataID = ""
       Future.successful(Redirect("/relation"))
 
   }

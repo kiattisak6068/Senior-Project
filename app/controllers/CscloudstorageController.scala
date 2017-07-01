@@ -62,7 +62,7 @@ import org.apache.commons.io.FilenameUtils
     def getdata(x: Option[String]) = x match {
      case Some(s) => s
      case None => ""
-   }
+    }
 
   def gitstatus = Action { request =>
     val r = "git status"
@@ -73,69 +73,46 @@ import org.apache.commons.io.FilenameUtils
   def upload = UserAwareAction.async { implicit request =>
   request.identity match {
     case Some(user) =>
+     val uuid = UUID.randomUUID
+
     request.body.asMultipartFormData.map {a =>
-      val datatitle = a.dataParts.get("title").map { a =>
-         for{
-           b <- a.mkString("")
-          }yield b
-      }
-      val datadetail = a.dataParts.get("detail").map { a =>
-         for{
-           b <- a.mkString("")
-          }yield b
-      }
-      val datadetail2 = a.dataParts.get("detail2").map { a =>
-         for{
-           b <- a.mkString("")
-          }yield b
-      }
-      val datadetail3 = a.dataParts.get("detail3").map { a =>
-         for{
-           b <- a.mkString("")
-          }yield b
-      }
-      val datadetail4 = a.dataParts.get("detail4").map { a =>
-         for{
-           b <- a.mkString("")
-          }yield b
-      }
-      val datadetail5 = a.dataParts.get("detail5").map { a =>
-         for{
-           b <- a.mkString("")
-          }yield b
-      }
-      val dataimg = a.file("img").map { a=>
-        val filename = a.filename
-        val extension = FilenameUtils.getExtension(filename)
-        val newFileName = s"${UUID.randomUUID}.$extension"
-        a.ref.moveTo(new File(s"public/images/imgCsCloud/$newFileName"))
-        for{
-          b <- newFileName
-        }yield b
-      }
+      for (
+        title <- a.dataParts.get("title");
+        detail <- a.dataParts.get("detail");
+        objective <- a.dataParts.get("detail2");
+        scope <- a.dataParts.get("detail3");
+        technology <- a.dataParts.get("detail4");
+        benefits <-a.dataParts.get("detail5");
+        pictureFile <- a.file("img")
+      ) yield {
+     //Logger.warn(s"pic = ${pic}, blend = ${blend}, html = ${html}")
+      val pictureExtension = reflect.io.File(pictureFile.filename).extension
+      val picture = s"$uuid.$pictureExtension"
 
       val get = for{
         t <- Advisers.getRelation(user.userID.toString)
         teaName <- ListUser.getUser(getdata(t.map{ a=> a.teaID}))
       }yield teaName
+
       val saveDatatoDB = get.map {data =>
         data.map {teaID =>
           val datatodb = DBDetail (
             userID = user.userID.toString,
-            topic = getdata(datatitle),
-            detail = getdata(datadetail),
-            objective = getdata(datadetail2),
-            scope = getdata(datadetail3),
-            technology = getdata(datadetail4),
-            benefits = getdata(datadetail5),
-            img = getdata(dataimg),
+            topic = title(0),
+            detail = detail(0),
+            objective = objective(0),
+            scope = scope(0),
+            technology = technology(0),
+            benefits = benefits(0),
+            img = picture,
             tea = getdata(teaID.fullName)
           )
-          val saveData = for{
-              a <- ObjDetails.add(datatodb)
-          }yield a
+          ObjDetails.add(datatodb)
         }
       }
+     // move files
+      pictureFile.ref.moveTo(new File(s"public/members/${user.userID}/รูปภาพ/$picture"))
+    }
 
       Future.successful(Redirect("/up"))
 
@@ -231,7 +208,7 @@ import org.apache.commons.io.FilenameUtils
             form => Future.successful(Redirect("/")),
             data => {
               ObjDetails.search(data.comment).map {case (detail) =>
-                Ok(views.html.listfile(detail,Commentform.form))
+                Ok(views.html.guesthome(UserConstants.guest,detail,Commentform.form))
                 }
               }
           )
@@ -251,11 +228,47 @@ import org.apache.commons.io.FilenameUtils
   def editComment(id : Long,str :String) = UserAwareAction.async { implicit request =>
     request.identity match {
       case Some(user) =>
-        
         Future.successful(Redirect(s"/showdetail/${str}"))
       case None =>Future.successful(Redirect("/"))
     }
   }
 
+  var userid = "";
+  def listfiles(id : String) = UserAwareAction.async { implicit request =>
+    request.identity match {
+      case Some(user) =>
+      userid = id;
+      val data = for{
+        role <- Userroles.get(user.userID.toString)
+      }yield (role)
+      data.map{ case (role) =>
+        val r = new java.io.File(s"public/members/${id}").listFiles
+        Ok(views.html.listfile(r,Commentform.form,user,role))
+      }
+      case None =>Future.successful(Redirect("/"))
+    }
+  }
+
+  def uploadFile = UserAwareAction.async { implicit request =>
+  request.identity match {
+    case Some(user) =>
+    request.body.asMultipartFormData.map {a =>
+      for (
+        pointer <- a.dataParts.get("pointer");
+        pictureFile <- a.file("uploadBtn")
+      ) yield {
+     //Logger.warn(s"pic = ${pic}, blend = ${blend}, html = ${html}")
+      val picture = pictureFile.filename
+     // move files
+      pictureFile.ref.moveTo(new File(s"public/members/${userid}/${pointer(0)}/$picture"))
+
+    }
+      Future.successful(Redirect(s"/listfile/${userid}"))
+    }.getOrElse {
+      Future.successful(Redirect(s"/listfile/$userid"))
+    }
+    case None => Future.successful(Redirect("/"))
+    }
+  }
 
 }
