@@ -76,7 +76,7 @@
 
                                   }
                                   @if(r.role == "อาจารย์"){
-                                    <li><a href="@routes.CscloudstorageController.listfiles(u.userID.toString)" > <i class="fa fa-user" aria-hidden="true"></i> โครงการ </a></li>
+                                    <li><a href="@routes.CscloudstorageController.listStu" > <i class="fa fa-user" aria-hidden="true"></i> โครงการนักศึกษา </a></li>
                                   }
                                   @if(r.role == "นักศึกษาโปรเจค"){
                                     <li><a href="@routes.CscloudstorageController.listfiles(u.userID.toString)" > <i class="fa fa-user" aria-hidden="true"></i> โครงการ </a></li>

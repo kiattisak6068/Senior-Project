@@ -209,7 +209,6 @@ class ApplicationController @Inject() (
       str = ""
       dataID = ""
       Future.successful(Redirect("/relation"))
-
   }
 
   def updateRelation(teaID : String) = Action.async { implicit request =>

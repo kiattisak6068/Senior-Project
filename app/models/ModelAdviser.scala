@@ -71,4 +71,8 @@ object Advisers {
   def listAll: Future[Seq[DBAdviser]] = {
     dbConfig.db.run(ad.result)
   }
+  def listStu (tea: String): Future[Seq[DBAdviser]] = {
+    dbConfig.db.run(ad.filter(_.teaID === tea).result)
+  }
+
 }

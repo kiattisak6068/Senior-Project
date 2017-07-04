@@ -19,7 +19,10 @@ import scala.concurrent.Future
 import sys.process._
 import java.io.File
 import play.api.libs.json._
-import org.apache.commons.io.FilenameUtils
+import scala.io.Source
+import scala.io._
+import java.io._
+
 
 /**
  * The basic application controller.
@@ -265,10 +268,96 @@ import org.apache.commons.io.FilenameUtils
     }
       Future.successful(Redirect(s"/listfile/${userid}"))
     }.getOrElse {
-      Future.successful(Redirect(s"/listfile/$userid"))
+      Future.successful(Redirect(s"/listfile/${userid}"))
     }
     case None => Future.successful(Redirect("/"))
     }
   }
+
+  var fol = "";
+  def listfilesInfolder(folder : String) = UserAwareAction.async { implicit request =>
+    request.identity match {
+      case Some(user) =>
+      fol = folder;
+      val data = for{
+        role <- Userroles.get(user.userID.toString)
+      }yield (role)
+      data.map{ case (role) =>
+        val r = new java.io.File(s"public/members/${userid}/${folder}").listFiles
+        Ok(views.html.listfileInfolder(r,Commentform.form,user,role))
+      }
+      case None =>Future.successful(Redirect("/"))
+    }
+  }
+
+  def listfilesInfile(file : String) = UserAwareAction.async { implicit request =>
+    request.identity match {
+      case Some(user) =>
+      val data = for{
+        role <- Userroles.get(user.userID.toString)
+      }yield (role)
+      data.map{ case (role) =>
+        try {
+          val r = new java.io.File(s"public/members/b776bec9-45f5-43cd-a410-e1fe73cc6ef0/เอกสารบทที่ 1/บทที่ 1.docx")
+          val source = Source.fromFile(r).getLines()
+          Ok(""+source)
+        } catch {
+          case e: Exception => Ok(""+e)
+        }
+
+      }
+      case None =>Future.successful(Redirect("/"))
+    }
+  }
+
+
+  def listStu = UserAwareAction.async { implicit request =>
+      request.identity match {
+        case Some(user) =>
+        val data = for{
+          role <- Userroles.get(user.userID.toString)
+          rela <- Advisers.listStu(user.userID.toString)
+          stu <- ListUser.listUserStudent
+        }yield (role,rela,stu)
+        data.map {case (role,relation,stu) =>
+          Ok(views.html.listStu(Commentform.form,user,role,relation,stu))
+        }
+        case None =>Future.successful(Redirect("/"))
+      }
+    }
+
+    var stuid = "";
+    def listfilesInfolderStu(id : String) = UserAwareAction.async { implicit request =>
+      request.identity match {
+        case Some(user) =>
+        stuid = id;
+        val data = for{
+          role <- Userroles.get(user.userID.toString)
+          stu <- ListUser.getUser(id)
+        }yield (role,stu)
+        data.map{ case (role,stu) =>
+          val r = new java.io.File(s"public/members/${id}").listFiles
+          Ok(views.html.folder(r,Commentform.form,user,role,stu))
+        }
+        case None =>Future.successful(Redirect("/"))
+      }
+    }
+
+    var folStu = "";
+    def listfilesInfileStu(folder : String) = UserAwareAction.async { implicit request =>
+      request.identity match {
+        case Some(user) =>
+        fol = folder;
+        val data = for{
+          role <- Userroles.get(user.userID.toString)
+          stu <- ListUser.getUser(stuid)
+        }yield (role,stu)
+        data.map{ case (role,stu) =>
+          val r = new java.io.File(s"public/members/${stuid}/${fol}").listFiles
+          Ok(views.html.fileStu(r,Commentform.form,user,role,stu))
+        }
+        case None =>Future.successful(Redirect("/"))
+      }
+    }
 
 }

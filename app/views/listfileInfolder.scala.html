@@ -10,16 +10,19 @@
       <div class="panel-body">
         <p>
           <i class="fa fa-folder" aria-hidden="true"></i></i><font color = "blue" > &nbsp; @user.fullName</font>
+
           <span style="float: right ;"><button type="button" name="uploadfile" data-toggle="modal" data-target="#myModal"><i class="fa fa-upload" aria-hidden="true"></i> อัพโหลด</button></span>
         <p>
 
         <table class="table table-striped">
+          <tr>
+            <td><i class="fa fa-folder-open" aria-hidden="true"></i><a href="@routes.CscloudstorageController.listfiles(user.userID.toString)">  ... </a><td>
+          </tr>
         @for(f <- file){
-          @if(f.getName != "รูปภาพ"){
-            <tr>
-              <td><i class="fa fa-folder-open" aria-hidden="true"></i><a href="@routes.CscloudstorageController.listfilesInfolder(f.getName)">  @f.getName </a><td>
-            </tr>
-          }
+          <tr>
+            <td><i class="fa fa-file-text-o" aria-hidden="true"></i><a href="#">  @f.getName </a><td>
+          </tr>
+
         }
         <table>
       </div>

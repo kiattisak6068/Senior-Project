@@ -1,0 +1,26 @@
+@(comment: Form[forms.Commentform.Data],user:models.User,roleuser:Option[models.DBUserRole],relation : Seq[models.DBAdviser],users : Seq[models.Modellist])(implicit request: RequestHeader, messages: Messages)
+
+@maincs(comment,Some(user),roleuser){
+  <fieldset class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p>
+          <i class="fa fa-folder" aria-hidden="true"></i></i><font color = "blue" > &nbsp; โครงการนักศึกษา </font>
+        <p>
+
+        <table class="table table-striped">
+          @for(r <- relation){
+            @for(u <- users){
+              @if(r.stuID == u.userID){
+              <tr>
+                <td><i class="fa fa-folder-open" aria-hidden="true"></i><a href="@routes.CscloudstorageController.listfilesInfolderStu(u.userID.toString)">  @u.fullName </a><td>
+                </tr>
+              }
+              }
+          }
+        <table>
+      </div>
+    </div>
+  </fieldset>
+
+}

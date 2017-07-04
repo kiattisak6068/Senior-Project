@@ -41,4 +41,9 @@ POST        /comment                            controllers.CscloudstorageContro
 GET         /search                             controllers.CscloudstorageController.search
 GET        /deleteComment/:str                  controllers.CscloudstorageController.deleteComment(id : Long,str : String)
 GET        /listfile/:id                        controllers.CscloudstorageController.listfiles(id : String)
+GET        /listfilesInfolder/:folder           controllers.CscloudstorageController.listfilesInfolder(folder : String)
+GET        /read/:file                          controllers.CscloudstorageController.listfilesInfile(file : String)
 POST       /uploadFile                          controllers.CscloudstorageController.uploadFile
+GET        /listRelation                        controllers.CscloudstorageController.listStu
+GET        /listfolderStu/:id                   controllers.CscloudstorageController.listfilesInfolderStu(id : String)
+GET        /listfileStu/:folder                 controllers.CscloudstorageController.listfilesInfileStu(folder : String)
