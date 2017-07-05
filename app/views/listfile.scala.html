@@ -1,11 +1,16 @@
 
-@(file : Array[java.io.File],comment: Form[forms.Commentform.Data],user:models.User,roleuser:Option[models.DBUserRole])(implicit request: RequestHeader, messages: Messages)
-
+@(file : Array[java.io.File],comment: Form[forms.Commentform.Data],user:models.User,roleuser:Option[models.DBUserRole],comdetail : Seq[models.DetailUpload])(implicit request: RequestHeader, messages: Messages)
+@import java.math.BigInteger; var i=0;
 @maincs(comment,Some(user),roleuser){
   <br>
   <br>
 <style media="screen">
-
+.work {
+  white-space: nowrap;
+  width: 8em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 </style>
   <fieldset class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
@@ -26,10 +31,24 @@
         <table class="table table-striped">
         @for(f <- file){
           @if(f.getName != "รูปภาพ"){
+
             <tr>
               <td><i class="fa fa-folder-open" aria-hidden="true"></i><a href="@routes.CscloudstorageController.listfilesInfolder(f.getName)">  @f.getName </a><td>
+                @for(de <- comdetail){
+                  @if(de.lesson == f.getName){
+                    <td > <p class="work"> @de.detail </p> </td>
+                    <td> @de.time </td>
+                    @{i = 1}
+                  }
+                }
+                @if(i == 0){
+                  <td></td>
+                  <td></td>
+                }
             </tr>
+
           }
+            @{i = 0}
         }
         <table>
       </div>
@@ -38,7 +57,7 @@
 
   <!--dialog เพิ่ม-->
   <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-md">
           <div class="modal-content">
               <div class="modal-header navbar navbar-inverse">
                 <a href="#">
@@ -63,7 +82,9 @@
                               <option value="ไฟล์โครงการ">ไฟล์โครงการ</option>
                             </select>
                             <br>
-                            <input id="uploadBtn" name="uploadBtn" type="file" class="upload form-control" />
+                            <input id="uploadBtn" name="uploadBtn" type="file" class="upload form-control" required/>
+                            <br>
+                            <textarea name="comment" rows="2" class="form-control" placeholder="อธิบาย" required></textarea>
                             <div class=" text-right" >
                                  <button type="submit" class="btn btn-info">ตกลง</button>
                              </div>

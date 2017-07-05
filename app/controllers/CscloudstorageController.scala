@@ -22,6 +22,9 @@ import play.api.libs.json._
 import scala.io.Source
 import scala.io._
 import java.io._
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 /**
@@ -243,10 +246,11 @@ import java.io._
       userid = id;
       val data = for{
         role <- Userroles.get(user.userID.toString)
-      }yield (role)
-      data.map{ case (role) =>
+        com <- ObjDetailUp.listAll(user.userID.toString)
+      }yield (role,com)
+      data.map{ case (role,com) =>
         val r = new java.io.File(s"public/members/${id}").listFiles
-        Ok(views.html.listfile(r,Commentform.form,user,role))
+        Ok(views.html.listfile(r,Commentform.form,user,role,com))
       }
       case None =>Future.successful(Redirect("/"))
     }
@@ -258,12 +262,41 @@ import java.io._
     request.body.asMultipartFormData.map {a =>
       for (
         pointer <- a.dataParts.get("pointer");
-        pictureFile <- a.file("uploadBtn")
+        pictureFile <- a.file("uploadBtn");
+        d <- a.dataParts.get("comment")
       ) yield {
-     //Logger.warn(s"pic = ${pic}, blend = ${blend}, html = ${html}")
-      val picture = pictureFile.filename
+     val pictureExtension = reflect.io.File(pictureFile.filename).extension
+     val picture = s"${pointer(0)}.$pictureExtension"
+     val path = s"public/members/${userid}/${pointer(0)}/$picture"
+     val c = ObjDetailUp.get(user.userID.toString,pointer(0))
+
+     val fileTemp = new File(path)
+     if (fileTemp.exists) {
+       fileTemp.delete()
+       val update = c.map{com =>
+         com.map{comment =>
+           val detail = DetailUpload(
+             id = comment.id,
+             detail = d(0),
+             userID = user.userID.toString,
+             lesson = pointer(0),
+             time = new SimpleDateFormat("dd/MM/yyyy").format(new Date())
+           )
+           ObjDetailUp.update(detail)
+         }
+       }
+     }else{
+       val detail = DetailUpload(
+         id = Some(0),
+         detail = d(0),
+         userID = user.userID.toString,
+         lesson = pointer(0),
+         time = new SimpleDateFormat("dd/mm/yy").format(new Date())
+       )
+       ObjDetailUp.add(detail)
+     }
      // move files
-      pictureFile.ref.moveTo(new File(s"public/members/${userid}/${pointer(0)}/$picture"))
+      pictureFile.ref.moveTo(new File(path))
 
     }
       Future.successful(Redirect(s"/listfile/${userid}"))
@@ -281,10 +314,11 @@ import java.io._
       fol = folder;
       val data = for{
         role <- Userroles.get(user.userID.toString)
-      }yield (role)
-      data.map{ case (role) =>
+        com <- ObjDetailUp.get(user.userID.toString,folder)
+      }yield (role,com)
+      data.map{ case (role,com) =>
         val r = new java.io.File(s"public/members/${userid}/${folder}").listFiles
-        Ok(views.html.listfileInfolder(r,Commentform.form,user,role))
+        Ok(views.html.listfileInfolder(r,Commentform.form,user,role,com))
       }
       case None =>Future.successful(Redirect("/"))
     }
@@ -382,4 +416,51 @@ import java.io._
         case None =>Future.successful(Redirect("/"))
       }
     }
+
+    def stuComment = UserAwareAction.async { implicit request =>
+      request.identity match {
+        case Some(user) =>
+        Commentform.form.bindFromRequest.fold(
+          form => Future.successful(Redirect("/")),
+          data => {
+                val com = DBCommentProject (
+                  id  = Some(0),
+                  detail = data.comment,
+                  userID = user.userID.toString,
+                  projectID = userid,
+                  lesson = fol
+                )
+                ObjCommentProject.add(com)
+
+                Future.successful(Redirect(routes.CscloudstorageController.listfilesInfolder(fol)))
+          }
+        )
+        case None => Future.successful(Redirect("/"))
+      }
+    }
+
+    def teaComment = UserAwareAction.async { implicit request =>
+      request.identity match {
+        case Some(user) =>
+        Commentform.form.bindFromRequest.fold(
+          form => Future.successful(Redirect(routes.CscloudstorageController.listfilesInfileStu(folStu))),
+          data => {
+                val com = DBCommentProject (
+                  id  = Some(0),
+                  detail = data.comment,
+                  userID = user.userID.toString,
+                  projectID = stuid,
+                  lesson = folStu
+                )
+                val save = for{
+                  add <- ObjCommentProject.add(com)
+                }yield add
+
+                Future.successful(Redirect(routes.CscloudstorageController.listfilesInfileStu(folStu)))
+          }
+        )
+        case None => Future.successful(Redirect("/"))
+      }
+    }
+
 }

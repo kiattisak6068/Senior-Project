@@ -1,11 +1,15 @@
 
-@(file : Array[java.io.File],comment: Form[forms.Commentform.Data],user:models.User,roleuser:Option[models.DBUserRole])(implicit request: RequestHeader, messages: Messages)
+@(file : Array[java.io.File],comment: Form[forms.Commentform.Data],user:models.User,roleuser:Option[models.DBUserRole],comdetail : Seq[models.DetailUpload])(implicit request: RequestHeader, messages: Messages)
 @import b3.inline.fieldConstructor
 @maincs(comment,Some(user),roleuser){
-
-<style media="screen">
-
-</style>
+  <style media="screen">
+  .work {
+    white-space: nowrap;
+    width: 8em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  </style>
 <fieldset class="col-md-8 col-md-offset-2">
   <div class="panel panel-default">
 
@@ -20,67 +24,99 @@
 </ui>
 </div>
     <div class="panel-body" >
-
-
       <table class="table table-striped">
         <table class="table table-striped">
           <tr>
-            <td><i class="fa fa-folder-open" aria-hidden="true"></i><a href="@routes.CscloudstorageController.listfiles(user.userID.toString)">  ... </a><td>
+            <td><i class="fa fa-folder-open" aria-hidde"true"></i><a href="@routes.CscloudstorageController.listfiles(user.userID.toString)">  ... </a><td>
+              <td></td>
+              <td></td>
           </tr>
       @for(f <- file){
-        @if(f.getName != "รูปภาพ"){
           <tr>
-            <td><i class="fa fa-file-text-o" aria-hidden="true"></i><a href="@routes.CscloudstorageController.dowloadfile(f.getName)">  @f.getName </a><td>
+            <td><i class="fa fa-folder-open" aria-hidden="true"></i><a href="@routes.CscloudstorageController.dowloadfile(f.getName)">  @f.getName </a><td>
+          @comdetail.map{de =>
+            <td > <p class="work"> @de.detail </p> </td>
+            <td> @de.time </td>
+          }
           </tr>
-        }
       }
       <table>
     </div>
   </div>
 </fieldset>
+<br>
+<br>
+<br>
+<hr>
 
+<div class="panel panel-default">
 
-  <!--dialog เพิ่ม-->
-  <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-              <div class="modal-header navbar navbar-inverse">
-                <a href="#">
-                  <button type="button" class="close" data-dismiss="modal"><font color = "white" >&times;</font></button>
-                </a>
-                  <h4 class="modal-title" id="myModalLabel"><font color = "white" ><i class="fa fa-upload" aria-hidden="true"></i> อัพโหลด</font></h4>
-              </div>
-              <div class="modal-body">
-                  <div class="row">
-                    <div class="col-xs-12 ">
-                      <div class="well">
-                        @helper.form(routes.CscloudstorageController.uploadFile, 'enctype -> "multipart/form-data") {
-                          @helper.CSRF.formField
+<div class="navbar navbar-default">
 
-                            <select name="pointer" class="form-control">
-                              <option value="เอกสารบทที่ 1">เอกสารบทที่ 1</option>
-                              <option value="เอกสารบทที่ 2">เอกสารบทที่ 2</option>
-                              <option value="เอกสารบทที่ 3">เอกสารบทที่ 3</option>
-                              <option value="เอกสารบทที่ 4">เอกสารบทที่ 4</option>
-                              <option value="เอกสารบทที่ 5">เอกสารบทที่ 5</option>
-                              <option value="เอกสารบทที่ 1">เอกสารบทที่ 6</option>
-                              <option value="ไฟล์โครงการ">ไฟล์โครงการ</option>
-                            </select>
-                            <br>
-                            <input id="uploadBtn" name="uploadBtn" type="file" class="upload form-control" />
-                            <div class=" text-right" >
-                                 <button type="submit" class="btn btn-info">ตกลง</button>
-                             </div>
-                        }
+ <a class="navbar-brand" >
+<font color = "#222"> &nbsp; ความคิดเห็น</font>
+</a>
+</div>
+  <div class="panel-body" >
+    <i class="fa fa-user" aria-hidden="true"></i><font color = "blue" > &nbsp; @user.fullName</font><font color = "#222" style="word-wrap:break-word;"> &nbsp; @comdetail.map{de => @de.detail}</font>
+  </div>
+</div>
 
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+  <div class="panel panel-default">
+    <div class="panel-body" >
+      @helper.form(action = routes.CscloudstorageController.stuComment()) {
+          @helper.CSRF.formField
+            @b3.textarea( comment("comment"), 'placeholder -> "แสดงความคิดเห็น" ,'rows -> 3 )
+              <div class=" text-right" >
+                   <button type="submit" class="btn btn-info">ตกลง</button>
+               </div>
+      }
     </div>
   </div>
-  <!--dialog เพิ่ม-->
+
+<!--dialog เพิ่ม-->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header navbar navbar-inverse">
+              <a href="#">
+                <button type="button" class="close" data-dismiss="modal"><font color = "white" >&times;</font></button>
+              </a>
+                <h4 class="modal-title" id="myModalLabel"><font color = "white" ><i class="fa fa-upload" aria-hidden="true"></i> อัพโหลด</font></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                  <div class="col-xs-12 ">
+                    <div class="well">
+                      @helper.form(routes.CscloudstorageController.uploadFile, 'enctype -> "multipart/form-data") {
+                        @helper.CSRF.formField
+
+                          <select name="pointer" class="form-control">
+                            <option value="เอกสารบทที่ 1">เอกสารบทที่ 1</option>
+                            <option value="เอกสารบทที่ 2">เอกสารบทที่ 2</option>
+                            <option value="เอกสารบทที่ 3">เอกสารบทที่ 3</option>
+                            <option value="เอกสารบทที่ 4">เอกสารบทที่ 4</option>
+                            <option value="เอกสารบทที่ 5">เอกสารบทที่ 5</option>
+                            <option value="เอกสารบทที่ 1">เอกสารบทที่ 6</option>
+                            <option value="ไฟล์โครงการ">ไฟล์โครงการ</option>
+                          </select>
+                          <br>
+                          <input id="uploadBtn" name="uploadBtn" type="file" class="upload form-control" required/>
+                          <br>
+                          <textarea name="comment" rows="2" class="form-control" placeholder="อธิบาย" required></textarea>
+                          <div class=" text-right" >
+                               <button type="submit" class="btn btn-info">ตกลง</button>
+                           </div>
+                      }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+<!--dialog เพิ่ม-->
 }
 <script type="text/javascript">
   document.getElementById("uploadBtn").onchange = function () {

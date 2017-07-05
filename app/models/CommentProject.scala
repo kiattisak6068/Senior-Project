@@ -42,7 +42,7 @@ object ObjCommentProject {
 
   }
 
-  def getUser(id: Long): Future[Option[DBCommentProject]] = {
+  def get(id: Long): Future[Option[DBCommentProject]] = {
     dbConfig.db.run(com.filter(_.id === id).result.headOption)
   }
 

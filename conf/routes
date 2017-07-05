@@ -49,3 +49,5 @@ GET        /listfolderStu/:id                   controllers.CscloudstorageContro
 GET        /listfileStu/:folder                 controllers.CscloudstorageController.listfilesInfileStu(folder : String)
 GET        /dowloadfile/:file                   controllers.CscloudstorageController.dowloadfile(file : String)
 GET        /dowloadfileStu/:file                controllers.CscloudstorageController.dowloadfileStu(file : String)
+POST        /stuComment                         controllers.CscloudstorageController.stuComment
+POST        /teaComment                         controllers.CscloudstorageController.teaComment
