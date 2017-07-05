@@ -2,16 +2,26 @@
 @(file : Array[java.io.File],comment: Form[forms.Commentform.Data],user:models.User,roleuser:Option[models.DBUserRole])(implicit request: RequestHeader, messages: Messages)
 
 @maincs(comment,Some(user),roleuser){
+  <br>
+  <br>
 <style media="screen">
 
 </style>
-  <fieldset class="col-md-6 col-md-offset-3">
+  <fieldset class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
-      <div class="panel-body">
-        <p>
-          <i class="fa fa-folder" aria-hidden="true"></i></i><font color = "blue" > &nbsp; @user.fullName</font>
-          <span style="float: right ;"><button type="button" name="uploadfile" data-toggle="modal" data-target="#myModal"><i class="fa fa-upload" aria-hidden="true"></i> อัพโหลด</button></span>
-        <p>
+
+   <div class="navbar navbar-inverse">
+
+     <a class="navbar-brand" >
+     <i class="fa fa-folder" aria-hidden="true"></i></i><font color = "white" > &nbsp; @user.fullName</font>
+   </a>
+     <ul class="nav navbar-nav navbar-right" style="margin-right:3%;margin-top:0.7%">
+     <a ><button type="button" name="uploadfile" data-toggle="modal" data-target="#myModal" ><i class="fa fa-upload" aria-hidden="true"></i> อัพโหลด</button></a>
+
+ </ui>
+ </div>
+      <div class="panel-body" >
+
 
         <table class="table table-striped">
         @for(f <- file){
@@ -30,11 +40,11 @@
   <div class="modal fade" id="myModal" role="dialog">
       <div class="modal-dialog modal-sm">
           <div class="modal-content">
-              <div class="modal-header">
-                <a href="/clear">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <div class="modal-header navbar navbar-inverse">
+                <a href="#">
+                  <button type="button" class="close" data-dismiss="modal"><font color = "white" >&times;</font></button>
                 </a>
-                  <h4 class="modal-title" id="myModalLabel"><i class="fa fa-upload" aria-hidden="true"></i> อัพโหลด</h4>
+                  <h4 class="modal-title" id="myModalLabel"><font color = "white" ><i class="fa fa-upload" aria-hidden="true"></i> อัพโหลด</font></h4>
               </div>
               <div class="modal-body">
                   <div class="row">

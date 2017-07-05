@@ -347,17 +347,39 @@ import java.io._
     def listfilesInfileStu(folder : String) = UserAwareAction.async { implicit request =>
       request.identity match {
         case Some(user) =>
-        fol = folder;
+        folStu = folder;
         val data = for{
           role <- Userroles.get(user.userID.toString)
           stu <- ListUser.getUser(stuid)
         }yield (role,stu)
         data.map{ case (role,stu) =>
-          val r = new java.io.File(s"public/members/${stuid}/${fol}").listFiles
+          val r = new java.io.File(s"public/members/${stuid}/${folder}").listFiles
           Ok(views.html.fileStu(r,Commentform.form,user,role,stu))
         }
         case None =>Future.successful(Redirect("/"))
       }
     }
 
+
+    def dowloadfile(fileToDownload : String) = UserAwareAction.async { implicit request =>
+      request.identity match {
+        case Some(user) =>
+        Future.successful(Ok.sendFile(
+          content = new java.io.File(s"public/members/${userid}/${fol}/${fileToDownload}"),
+          fileName = _ => s"${fileToDownload}"
+        ))
+        case None =>Future.successful(Redirect("/"))
+      }
+    }
+
+    def dowloadfileStu(fileToDownload : String) = UserAwareAction.async { implicit request =>
+      request.identity match {
+        case Some(user) =>
+        Future.successful(Ok.sendFile(
+          content = new java.io.File(s"public/members/${stuid}/${folStu}/${fileToDownload}"),
+          fileName = _ => s"${fileToDownload}"
+        ))
+        case None =>Future.successful(Redirect("/"))
+      }
+    }
 }

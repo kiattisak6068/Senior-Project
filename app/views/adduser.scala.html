@@ -4,22 +4,34 @@
 @role = @{ Seq("นักศึกษา"->"นักศึกษา","อาจารย์"->"อาจารย์","ผู้ดูแลระบบ"->"ผู้ดูแลระบบ") }
 
 @maincs(comment,Some(user),roleuser) {
+               <br>
+               <br>
+               <br>
+               <br>
+               <div class="col-md-6 col-md-offset-3">
+                   <div class="panel panel-default ">
+               				<div class="navbar navbar-inverse">
+               					<a class="navbar-brand">
+               						<span style="color:white;"> เพิ่มผู้ใช้งานระบบ </span>
+               					</a>
+               				</div>
+               				<div class="panel-body">
+                        @helper.form(action = routes.SignUpController.adduser()) {
+                            @helper.CSRF.formField
+                            @b3.text(signInForm("firstName"), '_hiddenLabel -> Messages("first.name"), 'placeholder -> Messages("ชื่อ"), 'class -> "form-control input-lg")
+                            @b3.text(signInForm("lastName"), '_hiddenLabel -> Messages("last.name"), 'placeholder -> Messages("สกุล"), 'class -> "form-control input-lg")
+                            @b3.text(signInForm("email"), '_hiddenLabel -> Messages("email"), 'placeholder -> Messages("อีเมล"), 'class -> "form-control input-lg")
+                            @b3.password(signInForm("password"), '_hiddenLabel -> Messages("password"), 'placeholder -> Messages("รหัสผ่าน"), 'class -> "form-control input-lg")
+                            @b3.select( signInForm("role"), options = role,'class -> "form-control input-lg" )
+                            <div class="form-group">
+                                <div>
+                                    <button id="submit" type="submit" value="submit" class="btn btn-lg btn-primary btn-block">@Messages("ยืนยัน")</button>
+                                </div>
+                            </div>
+                        }
+               					</div>
+               				</div>
+                     </div>
 
-              <fieldset class="col-md-6 col-md-offset-3" style="margin-top: -0.75%;">
-                  <legend>@Messages("เพิ่มผู้ใช้งานระบบ")</legend>
-                  @helper.form(action = routes.SignUpController.adduser()) {
-                      @helper.CSRF.formField
-                      @b3.text(signInForm("firstName"), '_hiddenLabel -> Messages("first.name"), 'placeholder -> Messages("ชื่อ"), 'class -> "form-control input-lg")
-                      @b3.text(signInForm("lastName"), '_hiddenLabel -> Messages("last.name"), 'placeholder -> Messages("สกุล"), 'class -> "form-control input-lg")
-                      @b3.text(signInForm("email"), '_hiddenLabel -> Messages("email"), 'placeholder -> Messages("อีเมล"), 'class -> "form-control input-lg")
-                      @b3.password(signInForm("password"), '_hiddenLabel -> Messages("password"), 'placeholder -> Messages("รหัสผ่าน"), 'class -> "form-control input-lg")
-                      @b3.select( signInForm("role"), options = role,'class -> "form-control input-lg" )
-                      <div class="form-group">
-                          <div>
-                              <button id="submit" type="submit" value="submit" class="btn btn-lg btn-primary btn-block">@Messages("ยืนยัน")</button>
-                          </div>
-                      </div>
-                  }
-              </fieldset>
 
 }

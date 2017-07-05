@@ -7,13 +7,34 @@
     left: 0;
     min-width: 100%;
     height: 500px;
+
   }
+  .panel > .panel-heading {
+    background-image: none;
+    background-color: #4D4D4D;
+    color: white;
+}
+  .panel > .panel-info{
+    border-color: #ADADAD;
+  }
+
+  .navbar-inverse {
+    background-color: #222;
+    border-color: #080808;
+}
+
+
   </style>
   <!-- Page Content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="row">
+<br>
+<br>
+<br>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+
 
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
               <!-- Indicators -->
@@ -45,25 +66,41 @@
             <!-- Marketing messaging and featurettes
             ================================================== -->
             <!-- Wrap the rest of the page in another container to center all the content. -->
+            <br>
 
 
-          <hr class="featurette-divider">
-          <div class="container marketing text-center">
-            <!-- Three columns of text below the carousel -->
-            <div class="row" >
-              @for(d <- detail){
-                <div class="col-md-4">
-                  <img class="img-circle" src="@routes.Assets.at(s"members/${d.userID}/รูปภาพ/${d.img}")" alt="Generic placeholder image" width="140" height="140">
-                  <a href="@routes.CscloudstorageController.viewDetial(d.userID)"><h4>@d.topic</h4></a>
-                </div><!-- /.col-lg-4 -->
-              }
+          </div>
 
-            <!-- START THE FEATURETTES -->
+</div>
+</div>
+</div>
+</div>
 
-        </div>
+
+<div class="container" style="width:89.5%">
+    <div class="panel panel-default">
+				<div class="navbar navbar-inverse">
+					<a class="navbar-brand">
+						<span style="color:white;"> <h3><i class="fa fa-folder" aria-hidden="true"></i> โครงการนักศึกษา</h3> </span>
+					</a>
+				</div>
+				<div class="panel-body">
+          <div class="row" >
+            @for(d <- detail){
+              <div class="col-md-3">
+              <div class="panel panel-default" >
+                 <div class="panel-body">
+                <img class="image fit" src="@routes.Assets.at(s"members/${d.userID}/รูปภาพ/${d.img}")" alt="Generic placeholder image" width="95%" height="180px">
+                <a href="@routes.CscloudstorageController.viewDetial(d.userID)" ><h4 style="margin-top:2%;text-align : center ;color:#464646">@d.topic</h4></a>
+              </div><!-- /.col-lg-4 -->
+          <!-- START THE FEATURETTES -->
       </div>
     </div>
-  </div>
+    }
+</div>
+					</div>
+				</div>
+      </div>
   <!-- /.container -->
 
   <!-- Carousel

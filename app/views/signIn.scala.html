@@ -4,18 +4,34 @@
 @import b3.inline.fieldConstructor
 
 @maincs(comment) {
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default ">
+  				<div class="navbar navbar-inverse">
+  					<a class="navbar-brand">
+  						<span style="color:white;"> เข้าสู่ระบบ </span>
+  					</a>
+  				</div>
+  				<div class="panel-body">
 
-    <fieldset class="col-md-6 col-md-offset-3">
-        <legend>เข้าสู่ระบบ</legend>
-        @helper.form(action = routes.CredentialsAuthController.authenticate()) {
-            @helper.CSRF.formField
-            @b3.email(signInForm("email"), '_hiddenLabel -> Messages("email"), 'placeholder -> "อีเมล", 'class -> "form-control input-lg")
-            @b3.password(signInForm("password"), '_hiddenLabel -> Messages("password"), 'placeholder -> "รหัสผ่าน", 'class -> "form-control input-lg")
-            <div class="form-group">
-                <div>
-                    <button id="submit" type="submit" value="submit" class="btn btn-lg btn-primary btn-block">เข้าสู่ระบบ</button>
+            @helper.form(action = routes.CredentialsAuthController.authenticate()) {
+                @helper.CSRF.formField
+                @b3.email(signInForm("email"), '_hiddenLabel -> Messages("email"), 'placeholder -> "อีเมล", 'class -> "form-control input-lg")
+                @b3.password(signInForm("password"), '_hiddenLabel -> Messages("password"), 'placeholder -> "รหัสผ่าน", 'class -> "form-control input-lg")
+                <div class="form-group">
+                    <div>
+                        <button id="submit" type="submit" value="submit" class="btn btn-lg btn-primary btn-block">เข้าสู่ระบบ</button>
+                    </div>
                 </div>
-            </div>
-        }
-    </fieldset>
+            }
+
+  					</div>
+  				</div>
+        </div>
+
 }

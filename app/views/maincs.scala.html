@@ -11,105 +11,220 @@
         <title>Cs Cloud Storage</title>
         <link href="//fonts.googleapis.com/css?family=Roboto|Montserrat:400,700|Open+Sans:400,300,600" rel="stylesheet">
         <link href="//cdnjs.cloudflare.com/ajax/libs/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Maitree|Sriracha" rel="stylesheet">
         <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.css"))">
         <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap-theme.min.css"))">
         <link rel="stylesheet" href="@routes.Assets.at("styles/main.css")">
         <link rel="stylesheet" href="@routes.Assets.at("jquery.dataTables.min.css")">
+        <link href="https://fonts.googleapis.com/css?family=Maitree" rel="stylesheet">
         <link rel="stylesheet"  href="@routes.Assets.at("font-awesome-4.7.0/css/font-awesome.min.css")">
         <style media="screen">
-        .navbar-brand {
-          float: left;
-          height: 60px;
-          padding: 18px 15px;
-          font-size: 20px;
-          line-height: 20px;
-        }
-        .navbar-color{
-          background-color: #909090;
-          border-color: #080808;
-        }
-        .navbar{
-          min-height: 50px;
-        }
-        .body{
-          background-color: #c3c3c3;
-        }
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+
+::selection {
+  background: #000;
+  color: #aaf;
+}
+.alternate ::selection {
+  background: #c00;
+  color: #000;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 2000px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+ul, li, h1, h2, h3, h4, h5, h6, p, a, .logo {
+  font-family: "Trebuchet MS",sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+
+.inner {
+  width: 85%;
+  position: relative;
+  margin: 0 auto;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  padding-top: 0px;
+  background: #000;
+  transition: 0.7s all;
+  z-index: 100;
+}
+
+header.alt-header {
+  background: #fff;
+}
+
+.alt-header a {
+  color: #000;
+}
+
+body.header-fixed header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding-top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+li {
+  list-style: none;
+}
+
+nav {
+  overflow: hidden;
+}
+
+nav ul {
+  float: right;
+}
+
+nav li {
+  display: inline;
+  float: left;
+}
+
+nav a {
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  padding: 18px;
+  transition: 0.3s all;
+}
+
+nav a:hover {
+  background: red;
+}
+
+.logo {
+  float: left;
+  color: #fff;
+  font-size: 36px;
+  line-height: 50px;
+  transition: 0.7s all;
+}
+
+.alt-header .logo {
+  color: #000;
+}
+
+body.header-fixed .logo {
+  font-size: 30px;
+}
+
+.alternate {
+  background: #000;
+  color: #fff;
+}
+
+section .inner {
+  padding-top: 200px;
+}
+.nav.navbar-nav.navbar-right li a {
+    color: white;
+    background-color: black;
+}
+
 
         </style>
     </head>
-    <body class="body">
-        <header class="navbar navbar-color navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">@Messages("toggle.navigation")</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#" style="color:#222"><i class="fa fa-folder" aria-hidden="true"></i> CS Cloud Storage</a>
-                </div>
-                <nav class="collapse navbar-collapse">
-                    <div class="nav navbar-nav">
-                      @helper.form(action = routes.CscloudstorageController.search() ,'class -> "navbar-form navbar-left") {
-                          @helper.CSRF.formField
-                          @b3.text( comment("comment"), 'class -> "form-control" )
+    <body>
+      <header id="topnav">
+  <div class="inner">
+    <div class="logo"><i class="fa fa-folder" aria-hidden="true"></i> CS Cloud Storage</div>
+    @helper.form(action = routes.CscloudstorageController.search() ,'class -> "navbar-form navbar-left") {
+        @helper.CSRF.formField
+        @b3.text( comment("comment"), 'class -> "form-control" )
 
-                          <button type="submit" class="btn" style="margin-top:-0.4%"><i class="fa fa-search" aria-hidden="true"></i></button>
+        <button type="submit" class="btn" style="margin-top:-0.4%"><i class="fa fa-search" aria-hidden="true"></i></button>
 
-                      }
+    }
 
-                    </div>
-                    <ul class="nav navbar-nav navbar-right">
-                      <li><a class="navbar-brand " href="/" style="color:#222"><i class="fa fa-home" aria-hidden="true"></i> หน้าหลัก </a></li>
-                      @user.map { u =>
-                        @roleUser.map { r =>
-                          @if(r.role != "นักศึกษา"){
-                            <li>
-                              <a href="#" class="navbar-brand" style="color:#222" role="button" data-toggle="dropdown"><i class="fa fa-bars" aria-hidden="true"> เมนู</i> <span class="caret"></a>
-                                <ul class="dropdown-menu">
-                                  @if(r.role == "ผู้ดูแลระบบ"){
-                                    <li><a href="/gotoadduser" > <i class="fa fa-user-plus" aria-hidden="true"></i> เพิ่มผู้ใช้งานระบบ </a></li>
-                                    <li><a href="/pagelist" > <i class="fa fa-user-times" aria-hidden="true"></i> จัดการผู้ใช้งานระบบ </a></li>
-                                    <li><a href="/relation" > <i class="fa fa-handshake-o" aria-hidden="true"></i> จัดการที่ปรึกษาโครงการ </a></li>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/" ><i class="fa fa-home" aria-hidden="true"></i> หน้าหลัก </a></li>
+        @user.map { u =>
+          @roleUser.map { r =>
+            @if(r.role != "นักศึกษา"){
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle"  role="button" data-toggle="dropdown"><i class="fa fa-bars" aria-hidden="true"> เมนู</i></a>
+                  <ul class="dropdown-menu">
+                    @if(r.role == "ผู้ดูแลระบบ"){
+                      <li><a href="/gotoadduser" > <i class="fa fa-user-plus" aria-hidden="true"></i> เพิ่มผู้ใช้งานระบบ </a></li>
+                      <li><a href="/pagelist" > <i class="fa fa-user-times" aria-hidden="true"></i> จัดการผู้ใช้งานระบบ </a></li>
+                      <li><a href="/relation" > <i class="fa fa-handshake-o" aria-hidden="true"></i> จัดการที่ปรึกษาโครงการ </a></li>
 
-                                  }
-                                  @if(r.role == "อาจารย์"){
-                                    <li><a href="@routes.CscloudstorageController.listStu" > <i class="fa fa-user" aria-hidden="true"></i> โครงการนักศึกษา </a></li>
-                                  }
-                                  @if(r.role == "นักศึกษาโปรเจค"){
-                                    <li><a href="@routes.CscloudstorageController.listfiles(u.userID.toString)" > <i class="fa fa-user" aria-hidden="true"></i> โครงการ </a></li>
-                                    <li><a href="/up" > <i class="fa fa-user" aria-hidden="true"></i> จัดการข้อมูลรายละเอียด </a></li>
-                                  }
+                    }
+                    @if(r.role == "อาจารย์"){
+                      <li><a href="@routes.CscloudstorageController.listStu" > <i class="fa fa-user" aria-hidden="true"></i> โครงการนักศึกษา </a></li>
+                    }
+                    @if(r.role == "นักศึกษาโปรเจค"){
+                      <li><a href="@routes.CscloudstorageController.listfiles(u.userID.toString)" > <i class="fa fa-user" aria-hidden="true"></i> โครงการ </a></li>
+                      <li><a href="/up" > <i class="fa fa-user" aria-hidden="true"></i> จัดการข้อมูลรายละเอียด </a></li>
+                    }
 
 
-                              </ul>
-                            </li>
-                            }
-                          }
+                </ul>
+              </li>
+              }
+            }
 
-                          <li class="dropdown">
-                            <a href="#" class="navbar-brand" role="button" data-toggle="dropdown"style="color:#222"><i class="fa fa-user" aria-hidden="true"></i> @u.firstName <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="@routes.ApplicationController.signOut"> <i class="fa fa-sign-out" aria-hidden="true"></i> ออกจากระบบ </a></li>
-                            </ul>
-                          </li>
-                       }.getOrElse {
-                            <li><a class="navbar-brand" href="/signIn" style="color:#222"><i class="fa fa-sign-in" aria-hidden="true"></i> เข้าสู่ระบบ </a></li>
-                        }
+            <li class="dropdown">
+              <a href="#" role="button" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i> @u.firstName <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="@routes.ApplicationController.signOut"> <i class="fa fa-sign-out" aria-hidden="true"></i> ออกจากระบบ </a></li>
+              </ul>
+            </li>
+         }.getOrElse {
+              <li><a href="/signIn"><i class="fa fa-sign-in" aria-hidden="true"></i> เข้าสู่ระบบ </a></li>
+          }
 
-                    </ul>
-                </nav>
-            </div>
-        </header>
-        <main class="container">
-            <div class="starter-template row">
+      </ul>
+
+
+  </div>
+</header>
+
                 @content
-            </div>
-        </main>
+
+
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))"></script>
         <script type="text/javascript" src="@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.js"))"></script>
         <script type="text/javascript" src="@routes.Assets.at("jquery.dataTables.min.js")"></script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+          $(window).scroll(function(){
+            var scrollTop = $(window).scrollTop();
+            if (scrollTop > 49) {
+              $('body').addClass('header-fixed');
+            } else {
+              $('body').removeClass('header-fixed');
+            }
+  // change the style of the navbar when the user scrolls into the next zone.
+  // get the distance of the 2nd section from the top of the page - height of header.
+            var topOffset = $('#demosection2').offset().top;
+            var headerHeight = $('#topnav').height();
+            var transitionPoint = topOffset - headerHeight;
+            if (scrollTop > transitionPoint) {
+              $('#topnav').addClass('alt-header');
+            } else {
+              $('#topnav').removeClass('alt-header');
+            }
+          });
+        });
+        </script>
     </body>
 </html>

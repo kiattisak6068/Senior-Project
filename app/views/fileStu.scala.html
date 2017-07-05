@@ -1,18 +1,20 @@
 
 @(file : Array[java.io.File],comment: Form[forms.Commentform.Data],user:models.User,roleuser:Option[models.DBUserRole],stu : Option[models.DBUser])(implicit request: RequestHeader, messages: Messages)
-
+@import b3.inline.fieldConstructor
 @maincs(comment,Some(user),roleuser){
-<style media="screen">
+  <br />
+  <br />
 
-</style>
-  <fieldset class="col-md-6 col-md-offset-3">
+  <fieldset class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
-      <div class="panel-body">
-        <p>
-          <i class="fa fa-folder" aria-hidden="true"></i></i><font color = "blue" > &nbsp; @stu.map{ s => @s.fullName}</font>
 
-          <span style="float: right ;"><button type="button" name="uploadfile" data-toggle="modal" data-target="#myModal"><i class="fa fa-upload" aria-hidden="true"></i> อัพโหลด</button></span>
-        <p>
+   <div class="navbar navbar-inverse">
+
+     <a class="navbar-brand" >
+     <i class="fa fa-folder" aria-hidden="true"></i><font color = "white" > &nbsp; @stu.map{ s => @s.fullName}</font>
+   </a>
+ </div>
+      <div class="panel-body" >
 
         <table class="table table-striped">
           <tr>
@@ -22,7 +24,7 @@
           </tr>
         @for(f <- file){
           <tr>
-            <td><i class="fa fa-file-text-o" aria-hidden="true"></i><a href="#">  @f.getName </a><td>
+            <td><i class="fa fa-file-text-o" aria-hidden="true"></i><a href="@routes.CscloudstorageController.dowloadfileStu(f.getName)">  @f.getName </a><td>
           </tr>
 
         }
@@ -30,5 +32,21 @@
       </div>
     </div>
   </fieldset>
+
+  <hr>
+
+    <div class="panel panel-default">
+      <div class="panel-body" >
+        @helper.form(action = routes.CscloudstorageController.commentProject()) {
+            @helper.CSRF.formField
+              @b3.textarea( comment("comment"), 'placeholder -> "แสดงความคิดเห็น" ,'rows -> 3 )
+                <div class=" text-right" >
+                     <button type="submit" class="btn btn-info">ตกลง</button>
+                 </div>
+        }
+      </div>
+    </div>
+
+
 
 }

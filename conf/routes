@@ -47,3 +47,5 @@ POST       /uploadFile                          controllers.CscloudstorageContro
 GET        /listRelation                        controllers.CscloudstorageController.listStu
 GET        /listfolderStu/:id                   controllers.CscloudstorageController.listfilesInfolderStu(id : String)
 GET        /listfileStu/:folder                 controllers.CscloudstorageController.listfilesInfileStu(folder : String)
+GET        /dowloadfile/:file                   controllers.CscloudstorageController.dowloadfile(file : String)
+GET        /dowloadfileStu/:file                controllers.CscloudstorageController.dowloadfileStu(file : String)
