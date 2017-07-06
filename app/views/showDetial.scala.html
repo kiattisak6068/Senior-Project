@@ -2,99 +2,100 @@
 
 @maincs(comment) {
 
-  <br>
-  <br>
-  <br>
-              <div class="container">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                  <div class="panel panel-default">
-                    <div class="panel-body">
-                      @for(a <- detail){
-                        <div class="row">
-                          <div class="col-md-5">
-                              <div class="thumbnail">
-                                  <img src="@routes.Assets.at(s"members/${a.userID}/รูปภาพ/${a.img}")" alt="">
-                              </div>
-                          </div>
-                          <div class="col-md-7">
-                            <h1 style="text-align : left ;word-wrap:break-word;">@a.topic</h1>
-                          </div>
-                        </div>
-                        <hr>
-                        <div style="padding: 0 50px 0 50px;">
-                        <div class="row " >
-                             <div class="col-md-12">
-                               <p style="word-wrap: break-word;">
-                                  @a.detail
-                             </div>
-                        </div>
-                        <hr>
-                        <div class="row " >
-                             <div class="col-md-12">
-                               <p>
-                                 <h4>วัตถุประสงค์</h4>
-                               </p>
-                               <p style="word-wrap: break-word;">
-                                  @a.objective
-                             </div>
-                        </div>
-                          <hr>
-                        <div class="row " >
-                             <div class="col-md-12">
-                               <p>
-                                 <h4>ขอบเขตโครงการ</h4>
-                               </p>
-                               <p style="word-wrap: break-word;">
-                                  @a.scope
-                             </div>
-                        </div>
-                          <hr>
-                        <div class="row " >
-                             <div class="col-md-12">
-                               <p>
-                                 <h4>เทคโนโลยีที่ใช้พัฒนา</h4>
-                               </p>
-                               <p style="word-wrap: break-word;">
-                                  @a.technology
-                             </div>
-                        </div>
-                        <hr>
-                        <div class="row " >
-                             <div class="col-md-12">
-                               <p>
-                                 <h4>ประโยชน์</h4>
-                               </p>
-                               <p style="word-wrap: break-word;">
-                                  @a.benefits
-                             </div>
-                        </div>
-                          <hr>
-                      }
-
-                        <div class="row">
-                            <div class="col-md-6">
-                              <p>
-                                <h4>ผู้รับผิดชอบโครงการ</h4>
-                              </p>
-                              <p>
-                                @for(s <- stu){  @s.fullName }
-                              </p>
-                            </div>
-                            <div class="col-md-6">
-                              <p>
-                                <h4>ที่ปรึกษาโครงการ</h4>
-                              </p>
-                              <p>
-                                  @for(t <- tea){  @t.fullName }
-                              </p>
-                            </div>
-                        </div>
-
-
-                    </div>
-                  </div>
-                    </div>
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        @for(a <- detail){
+        <div class="row">
+          <div class="col-md-5">
+            <div class="thumbnail">
+              <img src="@routes.Assets.at(s"members/${a.userID}/รูปภาพ/${a.img}")" alt="">
+            </div>
+          </div>
+          <div class="col-md-7">
+            <h1 style="text-align : left ;word-wrap:break-word;">@a.topic</h1>
+            <p>TEST</p>
+          </div>
+        </div>
+        <hr>
+        <div style="padding: 0 50px 0 50px;">
+          <div class="row " >
+            <div class="col-md-12">
+              <p style="word-wrap: break-word;">
+                @a.detail
+              </div>
+            </div>
+            <hr>
+            <div class="row " >
+              <div class="col-md-12">
+                <p>
+                  <h4>วัตถุประสงค์</h4>
+                </p>
+                <p style="word-wrap: break-word;">
+                  @a.objective
+                </div>
+              </div>
+              <hr>
+              <div class="row " >
+                <div class="col-md-12">
+                  <p>
+                    <h4>ขอบเขตโครงการ</h4>
+                  </p>
+                  <p style="word-wrap: break-word;">
+                    @a.scope
                   </div>
                 </div>
-}
+                <hr>
+                <div class="row " >
+                  <div class="col-md-12">
+                    <p>
+                      <h4>เทคโนโลยีที่ใช้พัฒนา</h4>
+                    </p>
+                    <p style="word-wrap: break-word;">
+                      @a.technology
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row " >
+                    <div class="col-md-12">
+                      <p>
+                        <h4>ประโยชน์</h4>
+                      </p>
+                      <p style="word-wrap: break-word;">
+                        @a.benefits
+                      </div>
+                    </div>
+                    <hr>
+                    }
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <p>
+                          <h4>ผู้รับผิดชอบโครงการ</h4>
+                        </p>
+                        <p>
+                          @for(s <- stu){  @s.fullName }
+                        </p>
+                      </div>
+                      <div class="col-md-6">
+                        <p>
+                          <h4>ที่ปรึกษาโครงการ</h4>
+                        </p>
+                        <p>
+                          @for(t <- tea){  @t.fullName }
+                        </p>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          }

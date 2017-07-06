@@ -3,54 +3,57 @@
 # ~~~~
 
 # Home page
-GET         /                                controllers.ApplicationController.index
-GET         /signIn                          controllers.ApplicationController.signIn
-GET         /signUp                          controllers.ApplicationController.signUp
-GET         /signOut                         controllers.ApplicationController.signOut
-GET         /authenticate/:provider          controllers.SocialAuthController.authenticate(provider)
-POST        /authenticate/credentials        controllers.CredentialsAuthController.authenticate
+GET  /                          controllers.ApplicationController.index
+GET  /signIn                    controllers.ApplicationController.signIn
+GET  /signUp                    controllers.ApplicationController.signUp
+GET  /signOut                   controllers.ApplicationController.signOut
+GET  /authenticate/:provider    controllers.SocialAuthController.authenticate(provider)
+POST /authenticate/credentials  controllers.CredentialsAuthController.authenticate
 #POST        /signUp                          controllers.SignUpController.signUp
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file                    controllers.Assets.at(path="/public", file)
-GET         /webjars/*file                   controllers.WebJarAssets.at(file)
+GET  /assets/*file              controllers.Assets.at(path="/public",                          file)
+GET  /webjars/*file             controllers.WebJarAssets.at(file)
 
 #Cs
-GET         /run                                controllers.ApplicationController.run
-GET         /adduser                            controllers.ApplicationController.signUpcs
-GET         /gotoadduser                        controllers.ApplicationController.adduser
-GET         /pagelist                           controllers.ApplicationController.getlist
-GET         /up                                 controllers.ApplicationController.uploadfile
-GET         /relation                           controllers.ApplicationController.relation
-GET         /addrelation/:teaID                 controllers.ApplicationController.addrelation(teaID :String)
-GET         /dataUser/:id                       controllers.ApplicationController.dataUser(id : String)
-GET         /clear                              controllers.ApplicationController.clear
-GET         /gup                                controllers.ApplicationController.gitupload
-GET         /updateRelation/:teaID              controllers.ApplicationController.updateRelation(teaID :String)
+GET  /run                       controllers.ApplicationController.run
+GET  /adduser                   controllers.ApplicationController.signUpcs
+GET  /gotoadduser               controllers.ApplicationController.adduser
+GET  /pagelist                  controllers.ApplicationController.getlist
+GET  /up                        controllers.ApplicationController.uploadfile
+GET  /relation                  controllers.ApplicationController.relation
+GET  /addrelation/:teaID        controllers.ApplicationController.addrelation(teaID            :String)
+GET  /dataUser/:id              controllers.ApplicationController.dataUser(id                  : String)
+GET  /clear                     controllers.ApplicationController.clear
+GET  /gup                       controllers.ApplicationController.gitupload
+GET  /updateRelation/:teaID     controllers.ApplicationController.updateRelation(teaID         :String)
 
 #POST       /signUpcs                           controllers.SignUpController.signUpcs
-POST        /addrole                            controllers.SignUpController.addrole
-POST        /adduserlogin                       controllers.SignUpController.adduser
+POST /addrole                   controllers.SignUpController.addrole
+POST /adduserlogin              controllers.SignUpController.adduser
 
-GET         /delete/:id                         controllers.CscloudstorageController.deleteUser(id : String)
-GET         /deleterelation/:id                 controllers.CscloudstorageController.deleteRelation(id : String)
-POST        /upload                             controllers.CscloudstorageController.upload()
-GET         /gsta                               controllers.CscloudstorageController.gitstatus
-GET         /viweDetail/:id                     controllers.CscloudstorageController.showDetial(id : String)
-GET         /showdetail/:id                     controllers.CscloudstorageController.viewDetial(id : String)
-POST        /comment                            controllers.CscloudstorageController.commentProject
-GET         /search                             controllers.CscloudstorageController.search
-GET        /deleteComment/:str                  controllers.CscloudstorageController.deleteComment(id : Long,str : String)
-GET        /listfile/:id                        controllers.CscloudstorageController.listfiles(id : String)
-GET        /listfilesInfolder/:folder           controllers.CscloudstorageController.listfilesInfolder(folder : String)
-GET        /read/:file                          controllers.CscloudstorageController.listfilesInfile(file : String)
-POST       /uploadFile                          controllers.CscloudstorageController.uploadFile
-GET        /listRelation                        controllers.CscloudstorageController.listStu
-GET        /listfolderStu/:id                   controllers.CscloudstorageController.listfilesInfolderStu(id : String)
-GET        /listfileStu/:folder                 controllers.CscloudstorageController.listfilesInfileStu(folder : String)
-GET        /dowloadfile/:file                   controllers.CscloudstorageController.dowloadfile(file : String)
-GET        /dowloadfileStu/:file                controllers.CscloudstorageController.dowloadfileStu(file : String)
-POST        /stuComment                         controllers.CscloudstorageController.stuComment
-POST        /teaComment                         controllers.CscloudstorageController.teaComment
-GET        /deletestuComment/:id               controllers.CscloudstorageController.deletestuComment(id : Long)
-GET        /deleteteaComment/:id               controllers.CscloudstorageController.deleteteaComment(id : Long)
+GET  /delete/:id                controllers.CscloudstorageController.deleteUser(id             : String)
+GET  /deleterelation/:id        controllers.CscloudstorageController.deleteRelation(id         : String)
+POST /upload                    controllers.CscloudstorageController.upload()
+GET  /gsta                      controllers.CscloudstorageController.gitstatus
+GET  /viweDetail/:id            controllers.CscloudstorageController.showDetial(id             : String)
+GET  /showdetail/:id            controllers.CscloudstorageController.viewDetial(id             : String)
+POST /comment                   controllers.CscloudstorageController.commentProject
+GET  /search                    controllers.CscloudstorageController.search
+GET  /deleteComment/:str        controllers.CscloudstorageController.deleteComment(id          : Long,str : String)
+GET  /listfile/:id              controllers.CscloudstorageController.listfiles(id              : String)
+GET  /listfilesInfolder/:folder controllers.CscloudstorageController.listfilesInfolder(folder  : String)
+GET  /read/:file                controllers.CscloudstorageController.listfilesInfile(file      : String)
+POST /uploadFile                controllers.CscloudstorageController.uploadFile
+GET  /listRelation              controllers.CscloudstorageController.listStu
+GET  /listfolderStu/:id         controllers.CscloudstorageController.listfilesInfolderStu(id   : String)
+GET  /listfileStu/:folder       controllers.CscloudstorageController.listfilesInfileStu(folder : String)
+GET  /dowloadfile/:file         controllers.CscloudstorageController.dowloadfile(file          : String)
+GET  /dowloadfileStu/:file      controllers.CscloudstorageController.dowloadfileStu(file       : String)
+POST /stuComment                controllers.CscloudstorageController.stuComment
+POST /teaComment                controllers.CscloudstorageController.teaComment
+GET  /deletestuComment/:id      controllers.CscloudstorageController.deletestuComment(id       : Long)
+GET  /deleteteaComment/:id      controllers.CscloudstorageController.deleteteaComment(id       : Long)
+
+GET  /zip/:userID               controllers.CscloudstorageController.zip(userID       : String)
+

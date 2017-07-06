@@ -15,6 +15,7 @@ import play.api.i18n.{ MessagesApi, Messages }
 import play.api.libs.concurrent.Execution.Implicits._
 import play.api.mvc.Action
 import play.api.mvc._
+import play.api.Logger
 import scala.concurrent.Future
 import sys.process._
 import java.io.File
@@ -470,5 +471,33 @@ import java.util.Calendar;
       }
     }
 
+    def zip(userID : String) = Action { implicit request =>
+      Logger.warn(s"zipping... $userID")
+
+      import java.io.{ BufferedInputStream, FileInputStream, FileOutputStream, ByteArrayOutputStream }
+      import java.util.zip.{ ZipEntry, ZipOutputStream }
+
+      val path = s"public/members/${userID}"
+      //val bytestream = new ByteArrayOutputStream();
+      val zipFile = new java.io.File(s"$path.zip")
+      val zip = new ZipOutputStream(new FileOutputStream(zipFile))
+      val files = utils.FileUtils.listFiles(new File(path))
+
+      files.foreach { file =>
+        if ( file.isFile ) {
+          zip.putNextEntry(new ZipEntry(file.getName))
+          val in = new BufferedInputStream(new FileInputStream(file))
+          var b = in.read()
+          while (b > -1) {
+            zip.write(b)
+            b = in.read()
+          }
+          in.close()
+        }
+        zip.closeEntry()
+      }
+      zip.close()
+      Ok.sendFile(zipFile)
+    }
 
 }
