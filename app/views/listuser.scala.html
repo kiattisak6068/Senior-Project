@@ -31,13 +31,10 @@
             @if(user.role == "นักศึกษาโปรเจค"){
               <td>นักศึกษา</td>
               <td style="text-align: center;" class="col-md-2 col-sm-3">
-                <button name="edit" class="btn btn-sm btn-default">แก้ไข</button>
-              </a>
               </td>
             }else{
               <td>@user.role</td>
               <td style="text-align: center;" class="col-md-2 col-sm-3">
-                <button name="edit" class="btn btn-sm btn-default">แก้ไข</button>
                 <a href="@routes.CscloudstorageController.deleteUser(user.userID)">
                 <button name="delete" class="btn btn-sm  btn-default">ลบ</button>
               </a>

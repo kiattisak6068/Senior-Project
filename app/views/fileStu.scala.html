@@ -1,43 +1,94 @@
 
-@(file : Array[java.io.File],comment: Form[forms.Commentform.Data],user:models.User,roleuser:Option[models.DBUserRole],stu : Option[models.DBUser])(implicit request: RequestHeader, messages: Messages)
+@(file : Array[java.io.File],comment: Form[forms.Commentform.Data],user:models.User,roleuser:Option[models.DBUserRole],stu : Option[models.DBUser],comdetail : Seq[models.DetailUpload],comPro : Seq[models.DBCommentProject])(implicit request: RequestHeader, messages: Messages)
 @import b3.inline.fieldConstructor
 @maincs(comment,Some(user),roleuser){
   <br />
   <br />
-
+  <style media="screen">
+  .work {
+    white-space: nowrap;
+    width: 8em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  </style>
   <fieldset class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
 
    <div class="navbar navbar-inverse">
 
      <a class="navbar-brand" >
-     <i class="fa fa-folder" aria-hidden="true"></i><font color = "white" > &nbsp; @stu.map{ s => @s.fullName}</font>
+     <i class="fa fa-folder" aria-hidden="true"></i></i><font color = "white" > &nbsp; @stu.map{ s => @s.fullName}</font>
    </a>
- </div>
+     <ul class="nav navbar-nav navbar-right" style="margin-right:3%;margin-top:0.7%">
+     <a ><button type="button" name="uploadfile" data-toggle="modal" data-target="#myModal" ><i class="fa fa-upload" aria-hidden="true"></i> อัพโหลด</button></a>
+
+  </ui>
+  </div>
       <div class="panel-body" >
-
         <table class="table table-striped">
-          <tr>
-            @stu.map { s=>
-              <td><i class="fa fa-folder-open" aria-hidden="true"></i><a href="@routes.CscloudstorageController.listfilesInfolderStu(s.userID.toString)">  ... </a><td>
-            }
-          </tr>
+          <table class="table table-striped">
+            <tr>
+                @stu.map { s=>
+                  <td><i class="fa fa-folder-open" aria-hidden="true"></i><a href="@routes.CscloudstorageController.listfilesInfolderStu(s.userID.toString)">  ... </a><td>
+                }
+                <td></td>
+                <td></td>
+            </tr>
         @for(f <- file){
-          <tr>
-            <td><i class="fa fa-file-text-o" aria-hidden="true"></i><a href="@routes.CscloudstorageController.dowloadfileStu(f.getName)">  @f.getName </a><td>
-          </tr>
-
+            <tr>
+              <td><i class="fa fa-folder-open" aria-hidden="true"></i><a href="@routes.CscloudstorageController.dowloadfileStu(f.getName)">  @f.getName </a><td>
+            @comdetail.map{de =>
+              <td > <p class="work"> @de.detail </p> </td>
+              <td> @de.time </td>
+            }
+            </tr>
         }
         <table>
       </div>
     </div>
   </fieldset>
-
+  <br>
+  <br>
+  <br>
   <hr>
+
+  <div class="panel panel-default">
+
+  <div class="navbar navbar-default">
+
+   <a class="navbar-brand" >
+  <font color = "#222"> &nbsp; ความคิดเห็น</font>
+  </a>
+  </div>
+    <div class="panel-body" >
+      <p><i class="fa fa-user" aria-hidden="true"></i><font color = "blue" > &nbsp;  @stu.map{ s => @s.fullName}</font><font color = "#222" style="word-wrap:break-word;"> &nbsp; @comdetail.map{de => @de.detail}</font></p>
+      @for(c <- comPro){
+        @if(c.userID.toString == user.userID.toString){
+          <p><i class="fa fa-user" aria-hidden="true"></i><font color = "blue" > &nbsp; @user.fullName</font>
+            <span style="float: right">
+              @c.id.map{ d =>
+                <a href="@routes.CscloudstorageController.deleteteaComment(d)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+              }
+           </span>
+          </p>
+          <span><font color = "#222" style="word-wrap:break-word;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@c.detail</font></span>
+        }else{
+            <p><i class="fa fa-user" aria-hidden="true"></i><font color = "blue" > &nbsp;@stu.map{ s => @s.fullName}</font>
+              <span style="float: right">
+             </span>
+
+            </p>
+            <span><font color = "#222" style="word-wrap:break-word;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @c.detail</font></span>
+          }
+        }
+
+    </div>
+  </div>
 
     <div class="panel panel-default">
       <div class="panel-body" >
-        @helper.form(action = routes.CscloudstorageController.commentProject()) {
+        @helper.form(action = routes.CscloudstorageController.teaComment()) {
             @helper.CSRF.formField
               @b3.textarea( comment("comment"), 'placeholder -> "แสดงความคิดเห็น" ,'rows -> 3 )
                 <div class=" text-right" >
@@ -46,7 +97,5 @@
         }
       </div>
     </div>
-
-
 
 }

@@ -1,5 +1,5 @@
 
-@(file : Array[java.io.File],comment: Form[forms.Commentform.Data],user:models.User,roleuser:Option[models.DBUserRole],comdetail : Seq[models.DetailUpload])(implicit request: RequestHeader, messages: Messages)
+@(file : Array[java.io.File],comment: Form[forms.Commentform.Data],user:models.User,roleuser:Option[models.DBUserRole],comdetail : Seq[models.DetailUpload],comPro : Seq[models.DBCommentProject],tea : Seq[models.Modellist])(implicit request: RequestHeader, messages: Messages)
 @import b3.inline.fieldConstructor
 @maincs(comment,Some(user),roleuser){
   <style media="screen">
@@ -58,7 +58,29 @@
 </a>
 </div>
   <div class="panel-body" >
-    <i class="fa fa-user" aria-hidden="true"></i><font color = "blue" > &nbsp; @user.fullName</font><font color = "#222" style="word-wrap:break-word;"> &nbsp; @comdetail.map{de => @de.detail}</font>
+    <p><i class="fa fa-user" aria-hidden="true"></i><font color = "blue" > &nbsp; @user.fullName</font><font color = "#222" style="word-wrap:break-word;"> &nbsp; @comdetail.map{de => @de.detail}</font></p>
+    @for(c <- comPro){
+      @if(c.userID.toString == user.userID.toString){
+        <p><i class="fa fa-user" aria-hidden="true"></i><font color = "blue" > &nbsp; @user.fullName</font>
+          <span style="float: right">
+            @c.id.map{ d =>
+              <a href="@routes.CscloudstorageController.deletestuComment(d)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            }
+         </span>
+        </p>
+        <span><font color = "#222" style="word-wrap:break-word;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@c.detail</font></span>
+      }
+      @for(t <- tea){
+        @if(c.userID.toString == t.userID.toString){
+          <p><i class="fa fa-user" aria-hidden="true"></i><font color = "blue" > &nbsp; @t.fullName</font>
+            <span style="float: right">
+           </span>
+
+          </p>
+          <span><font color = "#222" style="word-wrap:break-word;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @c.detail</font></span>
+        }
+      }
+    }
   </div>
 </div>
 

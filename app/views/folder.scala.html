@@ -1,12 +1,17 @@
 
-@(file : Array[java.io.File],comment: Form[forms.Commentform.Data],user:models.User,roleuser:Option[models.DBUserRole],stu : Option[models.DBUser])(implicit request: RequestHeader, messages: Messages)
-
+@(file : Array[java.io.File],comment: Form[forms.Commentform.Data],user:models.User,roleuser:Option[models.DBUserRole],stu : Option[models.DBUser],comdetail : Seq[models.DetailUpload])(implicit request: RequestHeader, messages: Messages)
+@import java.math.BigInteger; var i=0;
 @maincs(comment,Some(user),roleuser){
   <br>
   <br>
-<style media="screen">
-
-</style>
+  <style media="screen">
+  .work {
+    white-space: nowrap;
+    width: 8em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  </style>
   <fieldset class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
 
@@ -15,22 +20,39 @@
      <a class="navbar-brand" >
      <i class="fa fa-folder" aria-hidden="true"></i></i><font color = "white" > &nbsp; @stu.map{ s => @s.fullName}</font>
    </a>
+     <ul class="nav navbar-nav navbar-right" style="margin-right:3%;margin-top:0.7%">
+     <a ><button type="button" name="uploadfile" data-toggle="modal" data-target="#myModal" ><i class="fa fa-upload" aria-hidden="true"></i> อัพโหลด</button></a>
+
+ </ui>
  </div>
       <div class="panel-body" >
 
 
         <table class="table table-striped">
-          @for(f <- file){
-            @if(f.getName != "รูปภาพ"){
-              <tr>
-                <td><i class="fa fa-folder-open" aria-hidden="true"></i><a href="@routes.CscloudstorageController.listfilesInfileStu(f.getName)">  @f.getName </a><td>
-              </tr>
-            }
+        @for(f <- file){
+          @if(f.getName != "รูปภาพ"){
+
+            <tr>
+              <td><i class="fa fa-folder-open" aria-hidden="true"></i><a href="@routes.CscloudstorageController.listfilesInfileStu(f.getName)">  @f.getName </a><td>
+                @for(de <- comdetail){
+                  @if(de.lesson == f.getName){
+                    <td > <p class="work"> @de.detail </p> </td>
+                    <td> @de.time </td>
+                    @{i = 1}
+                  }
+                }
+                @if(i == 0){
+                  <td></td>
+                  <td></td>
+                }
+            </tr>
+
           }
+            @{i = 0}
+        }
         <table>
       </div>
     </div>
   </fieldset>
-
 
 }

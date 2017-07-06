@@ -34,6 +34,9 @@
                       <a href="@routes.ApplicationController.dataUser(u.userID)" data-toggle="modal" id="link">
                         <button name="@u.userID" class="btn btn-sm  btn-default">แก้ไข</button>
                       </a>
+                      <a href="@routes.CscloudstorageController.deleteRelation(u.userID)" data-toggle="modal" id="link">
+                        <button name="@u.userID" class="btn btn-sm  btn-default">ลบ</button>
+                      </a>
                       </td>
                     }
                   }

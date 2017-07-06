@@ -33,6 +33,7 @@ POST        /addrole                            controllers.SignUpController.add
 POST        /adduserlogin                       controllers.SignUpController.adduser
 
 GET         /delete/:id                         controllers.CscloudstorageController.deleteUser(id : String)
+GET         /deleterelation/:id                 controllers.CscloudstorageController.deleteRelation(id : String)
 POST        /upload                             controllers.CscloudstorageController.upload()
 GET         /gsta                               controllers.CscloudstorageController.gitstatus
 GET         /viweDetail/:id                     controllers.CscloudstorageController.showDetial(id : String)
@@ -51,3 +52,5 @@ GET        /dowloadfile/:file                   controllers.CscloudstorageContro
 GET        /dowloadfileStu/:file                controllers.CscloudstorageController.dowloadfileStu(file : String)
 POST        /stuComment                         controllers.CscloudstorageController.stuComment
 POST        /teaComment                         controllers.CscloudstorageController.teaComment
+GET        /deletestuComment/:id               controllers.CscloudstorageController.deletestuComment(id : Long)
+GET        /deleteteaComment/:id               controllers.CscloudstorageController.deleteteaComment(id : Long)

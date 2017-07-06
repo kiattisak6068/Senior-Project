@@ -46,8 +46,11 @@ object ObjCommentProject {
     dbConfig.db.run(com.filter(_.id === id).result.headOption)
   }
 
-  def listAll: Future[Seq[DBCommentProject]] = {
-    dbConfig.db.run(com.result)
+  def listAll(projectID : String ,lesson : String): Future[Seq[DBCommentProject]] = {
+    val q = for{
+      a <- com if a.projectID === projectID && a.lesson === lesson
+    }yield a
+    dbConfig.db.run(q.result)
   }
 
   def delete(id: Long): Future[Int] = {

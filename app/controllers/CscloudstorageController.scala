@@ -44,26 +44,21 @@ import java.util.Calendar;
    extends Silhouette[User, CookieAuthenticator] {
 
     def deleteUser(id: String) = Action.async { implicit request =>
-      val del = MUser.find(id)
-      val login = del.map { a =>
-        a.map { b =>
-          val ll = LoginInfo(
-            b.providerID,
-            b.providerKey
-          )
-          val des = for {
-            auth <- authInfoRepository.remove(ll)
-            role <- Userroles.delete(id)
-            user <- ListUser.delete(id)
-          }yield (auth,role,user)
+          ListUser.delete(id)
+          Userroles.delete(id)
+          Future.successful(Redirect("/pagelist"))
+      }
 
+      def deleteRelation(id: String) = Action.async { implicit request =>
+            Advisers.deleteUser(id)
+            ObjDetails.delete(id)
+            val path = s"public/members/${id}/"
+            val fileTemp = new File(path)
+            if (fileTemp.exists) {
+              fileTemp.delete()
+            }
+            Future.successful(Redirect("/relation"))
         }
-      }
-          login.map { res =>
-            Redirect(routes.ApplicationController.getlist())
-          }
-
-      }
 
     def getdata(x: Option[String]) = x match {
      case Some(s) => s
@@ -312,13 +307,16 @@ import java.util.Calendar;
     request.identity match {
       case Some(user) =>
       fol = folder;
+
       val data = for{
         role <- Userroles.get(user.userID.toString)
         com <- ObjDetailUp.get(user.userID.toString,folder)
-      }yield (role,com)
-      data.map{ case (role,com) =>
+        comPro <- ObjCommentProject.listAll(user.userID.toString,folder)
+        tea <- ListUser.listUserTeacher
+      }yield (role,com,comPro,tea)
+      data.map{ case (role,com,comPro,tea) =>
         val r = new java.io.File(s"public/members/${userid}/${folder}").listFiles
-        Ok(views.html.listfileInfolder(r,Commentform.form,user,role,com))
+        Ok(views.html.listfileInfolder(r,Commentform.form,user,role,com,comPro,tea))
       }
       case None =>Future.successful(Redirect("/"))
     }
@@ -326,20 +324,7 @@ import java.util.Calendar;
 
   def listfilesInfile(file : String) = UserAwareAction.async { implicit request =>
     request.identity match {
-      case Some(user) =>
-      val data = for{
-        role <- Userroles.get(user.userID.toString)
-      }yield (role)
-      data.map{ case (role) =>
-        try {
-          val r = new java.io.File(s"public/members/b776bec9-45f5-43cd-a410-e1fe73cc6ef0/เอกสารบทที่ 1/บทที่ 1.docx")
-          val source = Source.fromFile(r).getLines()
-          Ok(""+source)
-        } catch {
-          case e: Exception => Ok(""+e)
-        }
-
-      }
+      case Some(user) =>Future.successful(Redirect("/"))
       case None =>Future.successful(Redirect("/"))
     }
   }
@@ -368,10 +353,11 @@ import java.util.Calendar;
         val data = for{
           role <- Userroles.get(user.userID.toString)
           stu <- ListUser.getUser(id)
-        }yield (role,stu)
-        data.map{ case (role,stu) =>
+          com <- ObjDetailUp.listAll(id)
+        }yield (role,stu,com)
+        data.map{ case (role,stu,com) =>
           val r = new java.io.File(s"public/members/${id}").listFiles
-          Ok(views.html.folder(r,Commentform.form,user,role,stu))
+          Ok(views.html.folder(r,Commentform.form,user,role,stu,com))
         }
         case None =>Future.successful(Redirect("/"))
       }
@@ -385,10 +371,12 @@ import java.util.Calendar;
         val data = for{
           role <- Userroles.get(user.userID.toString)
           stu <- ListUser.getUser(stuid)
-        }yield (role,stu)
-        data.map{ case (role,stu) =>
+          com <- ObjDetailUp.get(stuid,folder)
+          comPro <- ObjCommentProject.listAll(stuid,folder)
+        }yield (role,stu,com,comPro)
+        data.map{ case (role,stu,com,comPro) =>
           val r = new java.io.File(s"public/members/${stuid}/${folder}").listFiles
-          Ok(views.html.fileStu(r,Commentform.form,user,role,stu))
+          Ok(views.html.fileStu(r,Commentform.form,user,role,stu,com,comPro))
         }
         case None =>Future.successful(Redirect("/"))
       }
@@ -462,5 +450,24 @@ import java.util.Calendar;
         case None => Future.successful(Redirect("/"))
       }
     }
+
+    def deletestuComment(id : Long) = UserAwareAction.async { implicit request =>
+      request.identity match {
+        case Some(user) =>
+          ObjCommentProject.delete(id)
+          Future.successful(Redirect(routes.CscloudstorageController.listfilesInfolder(fol)))
+        case None => Future.successful(Redirect("/"))
+      }
+    }
+
+    def deleteteaComment(id : Long) = UserAwareAction.async { implicit request =>
+      request.identity match {
+        case Some(user) =>
+          ObjCommentProject.delete(id)
+          Future.successful(Redirect(routes.CscloudstorageController.listfilesInfileStu(folStu)))
+        case None => Future.successful(Redirect("/"))
+      }
+    }
+
 
 }
