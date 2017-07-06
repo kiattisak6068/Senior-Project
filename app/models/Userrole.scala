@@ -60,4 +60,14 @@ object Userroles {
       case ex: Exception => ex.getCause.getMessage
     }
   }
+
+  def updateRole(id : String): Future[String] = {
+    val db = DBUserRole(
+      userID = id,
+      role = "นักศึกษา"
+    )
+    dbConfig.db.run(slickUsersRole.filter(_.userID === id).update(db)).map(res => "successfully").recover {
+      case ex: Exception => ex.getCause.getMessage
+    }
+  }
 }

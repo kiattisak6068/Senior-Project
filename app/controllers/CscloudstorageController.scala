@@ -52,6 +52,7 @@ import java.util.Calendar;
       def deleteRelation(id: String) = Action.async { implicit request =>
             Advisers.deleteUser(id)
             ObjDetails.delete(id)
+            Userroles.updateRole(id)
             val path = s"public/members/${id}/"
             val fileTemp = new File(path)
             if (fileTemp.exists) {
